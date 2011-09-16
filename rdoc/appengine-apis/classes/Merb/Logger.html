@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Merb::Logger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />Merb::Logger</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/merb-logger_rb.html">lib/appengine-apis/merb-logger.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Modifies the Merb <a href="Logger.html">Logger</a> class to save logs using
+the Logging API instead of writing directly to a stream.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000123"><<</a></li>
+        
+        <li><a href="#M000124">push</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000123"></a><b>&lt;&lt;</b>(string = nil)
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Logger.html#M000124">push</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000123_source')" id="l_M000123_source">show</a>
+                        
+                    </p>
+                    <div id="M000123_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/merb-logger.rb, line 29</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">string</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">ApiProxy</span>.<span class="ruby-identifier">log</span>(
+          <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">ApiProxy</span><span class="ruby-operator">::</span><span class="ruby-constant">LogRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Level</span><span class="ruby-operator">::</span><span class="ruby-identifier">info</span>, <span class="ruby-identifier">string</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000124"></a><b>push</b>(string = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for #<<
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

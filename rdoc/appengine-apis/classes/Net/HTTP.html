@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Net::HTTP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />Net::HTTP</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/urlfetch_rb.html">lib/appengine-apis/urlfetch.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Monkey patch <a href="HTTP.html">Net::HTTP</a> to makes requests using
+Google App Engine&#8217;s URLFetch Service.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000177">request</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000177"></a><b>request</b>(req, body=nil, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000177_source')" id="l_M000177_source">show</a>
+                        
+                    </p>
+                    <div id="M000177_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/urlfetch.rb, line 190</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">request</span>(<span class="ruby-identifier">req</span>, <span class="ruby-identifier">body</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">proto</span> = <span class="ruby-identifier">use_ssl?</span> <span class="ruby-value">? </span><span class="ruby-value str">'https'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'http'</span>
+        <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;#{proto}://#{addr_port}#{req.path}&quot;</span>
+        <span class="ruby-identifier">options</span> = {
+            <span class="ruby-identifier">:payload</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">body</span>,
+            <span class="ruby-identifier">:follow_redirects</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+            <span class="ruby-identifier">:allow_truncated</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+            <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">method</span>,
+            <span class="ruby-identifier">:headers</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">req</span>
+            }
+        <span class="ruby-identifier">res</span> = <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">URLFetch</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPContinue</span>)
+      <span class="ruby-identifier">res</span>.<span class="ruby-identifier">reading_body</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">req</span>.<span class="ruby-identifier">response_body_permitted?</span>) {
+        <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">res</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+      }
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">res</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Datastore::KeyRange</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Datastore::KeyRange</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/datastore_types_rb.html">lib/appengine-apis/datastore_types.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Represents a range of unique datastore identifiers from start.id to end.id
+inclusive. The Keys returned by an instance of this class have been
+consumed in the datastore&#8217;s id-space and are guaranteed never to be
+reused.
+</p>
+<p>
+This class can be used to construct <a href="Entity.html">Entity</a>
+Entities with Keys that have specific id values without fear of the
+datastore creating new records with those same ids at a later date. This
+can be helpful as part of a data migration or large bulk upload where you
+may need to preserve existing ids and relationships between entities.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000068">each</a></li>
+        
+        <li><a href="#M000066">end</a></li>
+        
+        <li><a href="#M000067">size</a></li>
+        
+        <li><a href="#M000065">start</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <span>Enumerable</span>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000068"></a><b>each</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000068_source')" id="l_M000068_source">show</a>
+                        
+                    </p>
+                    <div id="M000068_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 377</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>
+        <span class="ruby-identifier">iterator</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">key</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000066"></a><b>end</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+The last <a href="Key.html">Key</a> in the range.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000066_source')" id="l_M000066_source">show</a>
+                        
+                    </p>
+                    <div id="M000066_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 371</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">end</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000067"></a><b>size</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+The size of the range.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000067_source')" id="l_M000067_source">show</a>
+                        
+                    </p>
+                    <div id="M000067_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 374</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000065"></a><b>start</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+The first <a href="Key.html">Key</a> in the range.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000065_source')" id="l_M000065_source">show</a>
+                        
+                    </p>
+                    <div id="M000065_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 368</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

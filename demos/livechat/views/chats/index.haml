@@ -1,0 +1,42 @@
+- height = (params[:h] || 300).to_i
+#doc3
+  #hd
+  #bd
+    .yui-ge
+      .yui-u.first#chatMessageList{:style => "height: #{height - 100}px"}
+        - @chat_messages.reverse_each do |c_m|
+          = partial :'chats/_message', :locals => {:message_text => h(c_m.text), :username => h(c_m.chat_user.username), :date_time => c_m.created_at}
+          
+      .yui#chatUserList{:style => "height: #{height - 100}px"}
+        - @chat_users.each do |chat_user|
+          = partial :'chats/_user', :locals => {:username => h(chat_user.username)}
+    #newChatContainer{:style => "height: #{100}px"}
+      %form#chatForm
+        %table{:width => "100%"}
+          %tr
+            %td{:width => "15%"}
+              %label
+                Send As:
+            %td{:width => "70%"}
+              %input#userName{:type => 'text', :name => 'username'}
+            %td{:width => "15%"}
+
+          %tr
+            %td
+              %label
+                Chat:
+            %td
+              %textarea#chatMessage{:rows => 2, :name => 'message', :style => 'width: 100%'}
+            %td
+              %input{:type => 'submit', :value => 'Send'}
+  #ft
+:javascript
+  MessageQueue.messageTemplate = #{ (partial :'chats/_message', :locals => {:message_text => '#{messageText}', :username => '#{userName}', :date_time => '#{dateTime}'}).to_json};
+  UserList.userTemplate = #{(partial :'chats/_user', :locals => {:username => '#{userName}'}).to_json};
+  var messageQueue = new MessageQueue({chatId: #{@chat.id}, fetchRate: 1000, renderRate: 250, lastMessageId: #{@last_chat_message_id}, lastMessageSequence: #{@last_chat_message_sequence}});
+  messageQueue.startFetchMessages();
+  messageQueue.startRenderMessages();
+  var pinger = new Pinger({chatId: #{@chat.id}, pingRate: 30000});
+  var chat = new Chat({id: #{@chat.id}, pinger: pinger});
+  var userList = new UserList({chatId: #{@chat.id}, fetchRate: 10000, currentChatUsers: #{@chat_users.collect{|chat_user| {:id => chat_user.id, :userName => chat_user.username} }.to_json}});
+  userList.fetchList();

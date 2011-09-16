@@ -1,0 +1,1600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Memcache</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Memcache</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/memcache_rb.html">lib/appengine-apis/memcache.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+The Ruby API for the App Engine <a href="Memcache.html">Memcache</a>
+service. This offers a fast distributed cache for commonly-used data. The
+cache is limited both in duration and also in total space, so objects
+stored in it may be discarded at any time.
+</p>
+<p>
+Note that null is a legal value to store in the cache, or to use as a cache
+key. Strings are stored encoded as utf-8. To store binary data use <a
+href="Datastore/Blob.html">AppEngine::Datastore::Blob</a> or
+<tt>str.to_java_bytes</tt>.
+</p>
+<p>
+The values returned from this API are mutable copies from the cache;
+altering them has no effect upon the cached value itself until assigned
+with one of the put methods. Likewise, the methods returning collections
+return mutable collections, but changes do not affect the cache.
+</p>
+<p>
+Except for the <a href="Memcache.html#M000132">incr</a> and <a
+href="Memcache.html#M000133">decr</a> methods, this service does not offer
+atomicity guarantees. In particular, operations accessing multiple keys are
+non-atomic.
+</p>
+<p>
+Increment has a number of caveats to its use; please consult the method
+documentation.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000119">[]</a></li>
+        
+        <li><a href="#M000129">[]=</a></li>
+        
+        <li><a href="#M000114">active?</a></li>
+        
+        <li><a href="#M000125">add</a></li>
+        
+        <li><a href="#M000126">add_many</a></li>
+        
+        <li><a href="#M000116">clear</a></li>
+        
+        <li><a href="#M000133">decr</a></li>
+        
+        <li><a href="#M000121">delete</a></li>
+        
+        <li><a href="#M000122">delete_many</a></li>
+        
+        <li><a href="#M000140">do_nothing</a></li>
+        
+        <li><a href="#M000115">flush_all</a></li>
+        
+        <li><a href="#M000118">get</a></li>
+        
+        <li><a href="#M000120">get_hash</a></li>
+        
+        <li><a href="#M000132">incr</a></li>
+        
+        <li><a href="#M000137">inspect</a></li>
+        
+        <li><a href="#M000134">namespace</a></li>
+        
+        <li><a href="#M000135">namespace=</a></li>
+        
+        <li><a href="#M000112">new</a></li>
+        
+        <li><a href="#M000139">raise_errors=</a></li>
+        
+        <li><a href="#M000138">raise_errors?</a></li>
+        
+        <li><a href="#M000136">readonly?</a></li>
+        
+        <li><a href="#M000130">replace</a></li>
+        
+        <li><a href="#M000131">replace_many</a></li>
+        
+        <li><a href="#M000141">server_item_stats</a></li>
+        
+        <li><a href="#M000142">server_malloc_stats</a></li>
+        
+        <li><a href="#M000143">server_map_stats</a></li>
+        
+        <li><a href="#M000144">server_reset_stats</a></li>
+        
+        <li><a href="#M000145">server_size_stats</a></li>
+        
+        <li><a href="#M000146">server_slab_stats</a></li>
+        
+        <li><a href="#M000147">server_stats</a></li>
+        
+        <li><a href="#M000148">servers=</a></li>
+        
+        <li><a href="#M000113">service</a></li>
+        
+        <li><a href="#M000127">set</a></li>
+        
+        <li><a href="#M000128">set_many</a></li>
+        
+        <li><a href="#M000117">stats</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="Memcache/InvalidValueError.html">AppEngine::Memcache::InvalidValueError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Memcache/KeyMap.html">AppEngine::Memcache::KeyMap</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Memcache/MemcacheError.html">AppEngine::Memcache::MemcacheError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Memcache/ServerError.html">AppEngine::Memcache::ServerError</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">ADD</td>
+            <td>=</td>
+            <td class="attr-value">MemcacheService::SetPolicy::ADD_ONLY_IF_NOT_PRESENT</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">REPLACE</td>
+            <td>=</td>
+            <td class="attr-value">MemcacheService::SetPolicy::REPLACE_ONLY_IF_PRESENT</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">SET</td>
+            <td>=</td>
+            <td class="attr-value">MemcacheService::SetPolicy::SET_ALWAYS</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">MemCacheError</td>
+            <td>=</td>
+            <td class="attr-value">MemcacheError</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">ClientError</td>
+            <td>=</td>
+            <td class="attr-value">MemcacheError</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">InternalError</td>
+            <td>=</td>
+            <td class="attr-value">MemcacheError</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">MARSHAL_MARKER</td>
+            <td>=</td>
+            <td class="attr-value">'--JRuby Marshal Data--'</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000112"></a><b>new</b>(*servers)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000112_source')" id="l_M000112_source">show</a>
+                        
+                    </p>
+                    <div id="M000112_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 76</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">servers</span>)
+      <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">servers</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Hash</span>
+        <span class="ruby-identifier">servers</span>[<span class="ruby-value">-1</span>]
+      <span class="ruby-keyword kw">else</span>
+        {}
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">:namespace</span>)
+        <span class="ruby-identifier">service</span>.<span class="ruby-identifier">namespace</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:namespace</span>]
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@readonly</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:readonly</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000119"></a><b>[]</b>(*keys)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000118">get</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000129"></a><b>cache[:foo, :bar] = 1, 2
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Syntactic sugar for calling set_many.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000129_source')" id="l_M000129_source">show</a>
+                        
+                    </p>
+                    <div id="M000129_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 290</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">values</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Array</span>
+        <span class="ruby-identifier">set_many</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>))
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">set</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">values</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000114"></a><b>active?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000114_source')" id="l_M000114_source">show</a>
+                        
+                    </p>
+                    <div id="M000114_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 93</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active?</span>
+      <span class="ruby-comment cmt"># TODO use the capability api to see if Memcache is disabled.</span>
+      <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000125"></a><b>add</b>(key, value, expiration=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sets a key&#8217;s value, iff item is not already in memcache.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>key: Key to set.
+
+</li>
+<li>value: Value to set. Any type. If complex, will be marshaled.
+
+</li>
+<li>expiration: Optional expiration time, either relative number of seconds
+from current time (up to 1 month), an absolute Unix epoch time, or a <a
+href="../Time.html">Time</a>. By default, items never expire, though items
+may be evicted due to memory pressure.
+
+</li>
+</ul>
+<p>
+Returns true if added, false on error.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000125_source')" id="l_M000125_source">show</a>
+                        
+                    </p>
+                    <div id="M000125_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 233</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">expiration</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">put</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">expiration</span>, <span class="ruby-constant">ADD</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000126"></a><b>add_many</b>(pairs, expiration=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Set multiple keys&#8217; values iff items are not already in memcache.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>pairs: Hash of keys to values, or Array of [key, value] pairs.
+
+</li>
+<li>expiration: Optional expiration time, either relative number of seconds
+from current time (up to 1 month), an absolute Unix epoch time, or a <a
+href="../Time.html">Time</a>. By default, items never expire, though items
+may be evicted due to memory pressure.
+
+</li>
+</ul>
+<p>
+Returns a list of keys whose values were NOT set. On total success this
+list should be empty.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000126_source')" id="l_M000126_source">show</a>
+                        
+                    </p>
+                    <div id="M000126_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 248</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_many</span>(<span class="ruby-identifier">pairs</span>, <span class="ruby-identifier">expiration</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">put_many</span>(<span class="ruby-identifier">pairs</span>, <span class="ruby-identifier">expiration</span>, <span class="ruby-constant">ADD</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000116"></a><b>clear</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000115">flush_all</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000133"></a><b>decr</b>(key, delta=1)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Atomically fetches, deccrements, and stores a given integral value.
+&#8220;Integral&#8221; types are Fixnum and in some cases String (if the
+string is parseable as a number. The entry must already exist.
+</p>
+<p>
+Internally, the value is a unsigned 64-bit integer. <a
+href="Memcache.html">Memcache</a> caps decrementing below zero to zero.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>key: the key of the entry to manipulate
+
+</li>
+<li>delta: the size of the decrement
+
+</li>
+</ul>
+<p>
+Returns the post-decrement value.
+</p>
+<p>
+Throws <a href="Memcache/InvalidValueError.html">InvalidValueError</a> if
+the object decremented is not of an integral type.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000133_source')" id="l_M000133_source">show</a>
+                        
+                    </p>
+                    <div id="M000133_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 371</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decr</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">delta</span>=<span class="ruby-value">1</span>)
+      <span class="ruby-identifier">check_write</span>
+      <span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">service</span>.<span class="ruby-identifier">increment</span>(<span class="ruby-identifier">memcache_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-operator">-</span><span class="ruby-identifier">delta</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000121"></a><b>delete</b>(key, time=nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Removes the given key from the cache, and prevents it from being added
+using <a href="Memcache.html#M000125">add</a> for <tt>time</tt> seconds
+thereafter. Calls to <a href="Memcache.html#M000127">set</a> are not
+blocked.
+</p>
+<p>
+Returns true if an entry existed to delete.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000121_source')" id="l_M000121_source">show</a>
+                        
+                    </p>
+                    <div id="M000121_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 200</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">time</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">time</span> <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">check_write</span>
+      <span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">service</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">memcache_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">time</span> <span class="ruby-operator">*</span> <span class="ruby-value">1000</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000122"></a><b>delete_many</b>(keys, time=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Removes the given keys from the cache, and prevents them from being added
+using <a href="Memcache.html#M000125">add</a> for <tt>time</tt> seconds
+thereafter. Calls to <a href="Memcache.html#M000127">set</a> are not
+blocked.
+</p>
+<p>
+Returns the set of keys deleted. Any keys in <tt>keys</tt> but not in the
+returned set were not found in the cache.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000122_source')" id="l_M000122_source">show</a>
+                        
+                    </p>
+                    <div id="M000122_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 213</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_many</span>(<span class="ruby-identifier">keys</span>, <span class="ruby-identifier">time</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">check_write</span>
+      <span class="ruby-identifier">key_map</span> = <span class="ruby-constant">KeyMap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">keys</span>)
+      <span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">java_keys</span> = <span class="ruby-identifier">service</span>.<span class="ruby-identifier">delete_all</span>(<span class="ruby-identifier">key_map</span>.<span class="ruby-identifier">java_keys</span>, <span class="ruby-identifier">time</span> <span class="ruby-operator">*</span> <span class="ruby-value">1000</span>)
+        <span class="ruby-identifier">key_map</span>.<span class="ruby-identifier">ruby_keys</span>(<span class="ruby-identifier">java_keys</span>)
+      <span class="ruby-keyword kw">end</span>      
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000140"></a><b>do_nothing</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+For backwards compatibility. Simply returns nil
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Memcache.html#M000141">server_item_stats</a>
+                    
+                    <a href="Memcache.html#M000142">server_malloc_stats</a>
+                    
+                    <a href="Memcache.html#M000143">server_map_stats</a>
+                    
+                    <a href="Memcache.html#M000144">server_reset_stats</a>
+                    
+                    <a href="Memcache.html#M000145">server_size_stats</a>
+                    
+                    <a href="Memcache.html#M000146">server_slab_stats</a>
+                    
+                    <a href="Memcache.html#M000147">server_stats</a>
+                    
+                    <a href="Memcache.html#M000148">servers=</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000140_source')" id="l_M000140_source">show</a>
+                        
+                    </p>
+                    <div id="M000140_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 421</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_nothing</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000115"></a><b>flush_all</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Empties the cache of all values. Statistics are not affected. Note that <a
+href="Memcache.html#M000116">clear</a> does not respect namespaces - this
+flushes the cache for every namespace.
+</p>
+<p>
+Returns true on success, false on RPC or server error.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Memcache.html#M000116">clear</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000115_source')" id="l_M000115_source">show</a>
+                        
+                    </p>
+                    <div id="M000115_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 103</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">flush_all</span>
+      <span class="ruby-identifier">check_write</span>
+      <span class="ruby-identifier">with_errors</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">service</span>.<span class="ruby-identifier">clear_all</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">MemcacheError</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000118"></a><b>get</b>(*keys)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Fetch and return the values associated with the given +key+s from the
+cache. Returns <tt>nil</tt> for any value that wasn’t in the cache.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Memcache.html#M000119">[]</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000118_source')" id="l_M000118_source">show</a>
+                        
+                    </p>
+                    <div id="M000118_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 158</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+      <span class="ruby-identifier">multiple</span> = (<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">multiple</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">keys</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>)
+        <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">keys</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">multiple</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">get_hash</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+      <span class="ruby-identifier">values</span> = <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>]}
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">multiple</span>
+        <span class="ruby-identifier">values</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000120"></a><b>get_hash</b>(*keys)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Looks up multiple keys from memcache in one operation. This is more
+efficient than multiple separate calls to <a
+href="Memcache.html#M000118">get</a>.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>keys: List of keys to look up.
+
+</li>
+</ul>
+<p>
+Returns a hash of the keys and values that were present in memcache.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000120_source')" id="l_M000120_source">show</a>
+                        
+                    </p>
+                    <div id="M000120_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 181</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_hash</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+      <span class="ruby-identifier">key_map</span> = <span class="ruby-constant">KeyMap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">keys</span>)
+      <span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">map</span> = <span class="ruby-identifier">service</span>.<span class="ruby-identifier">getAll</span>(<span class="ruby-identifier">key_map</span>.<span class="ruby-identifier">java_keys</span>)
+        <span class="ruby-identifier">key_map</span>.<span class="ruby-identifier">map_to_hash</span>(<span class="ruby-identifier">map</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">java_kind_of?</span>(<span class="ruby-identifier">java</span>.<span class="ruby-identifier">util</span>.<span class="ruby-constant">ArrayList</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span> <span class="ruby-operator">&amp;&amp;</span>
+              <span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">MARSHAL_MARKER</span>
+            <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">String</span>.<span class="ruby-identifier">from_java_bytes</span>(<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>]))
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">value</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000132"></a><b>incr</b>(key, delta=1)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Atomically fetches, increments, and stores a given integral value.
+&#8220;Integral&#8221; types are Fixnum and in some cases String (if the
+string is parseable as a number. The entry must already exist.
+</p>
+<p>
+Internally, the value is a unsigned 64-bit integer. <a
+href="Memcache.html">Memcache</a> doesn&#8217;t check 64-bit overflows. The
+value, if too large, will wrap around.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>key: the key of the entry to manipulate
+
+</li>
+<li>delta: the size of the increment.
+
+</li>
+</ul>
+<p>
+Returns the post-increment value.
+</p>
+<p>
+Throws <a href="Memcache/InvalidValueError.html">InvalidValueError</a> if
+the object incremented is not of an integral type.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000132_source')" id="l_M000132_source">show</a>
+                        
+                    </p>
+                    <div id="M000132_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 349</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">incr</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">delta</span>=<span class="ruby-value">1</span>)
+      <span class="ruby-identifier">check_write</span>
+      <span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">service</span>.<span class="ruby-identifier">increment</span>(<span class="ruby-identifier">memcache_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">delta</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000137"></a><b>inspect</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000137_source')" id="l_M000137_source">show</a>
+                        
+                    </p>
+                    <div id="M000137_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 393</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+      <span class="ruby-node">&quot;&lt;Memcache ns:#{namespace.inspect}, ro:#{readonly?.inspect}&gt;&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000134"></a><b>namespace</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Get the name of the namespace that will be used in API calls.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000134_source')" id="l_M000134_source">show</a>
+                        
+                    </p>
+                    <div id="M000134_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 379</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">namespace</span>
+      <span class="ruby-identifier">service</span>.<span class="ruby-identifier">namespace</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000135"></a><b>namespace=</b>(value)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Change the namespace used in API calls.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000135_source')" id="l_M000135_source">show</a>
+                        
+                    </p>
+                    <div id="M000135_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 384</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">namespace=</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">service</span>.<span class="ruby-identifier">namespace</span> = <span class="ruby-identifier">value</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000139"></a><b>raise_errors=</b>(should_raise)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Set whether this client raises an exception if there&#8217;s an error
+contacting the server.
+</p>
+<p>
+If <tt>should_raise</tt> is true, a <a
+href="Memcache/ServerError.html">ServerError</a> is raised whenever there
+is an error contacting the server.
+</p>
+<p>
+If <tt>should_raise</tt> is false (the default), a cache miss is simulated
+instead of raising an error.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000139_source')" id="l_M000139_source">show</a>
+                        
+                    </p>
+                    <div id="M000139_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 412</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raise_errors=</span>(<span class="ruby-identifier">should_raise</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">should_raise</span>
+        <span class="ruby-identifier">service</span>.<span class="ruby-identifier">error_handler</span> = <span class="ruby-constant">StrictErrorHandler</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">service</span>.<span class="ruby-identifier">error_handler</span> = <span class="ruby-constant">LogAndContinueErrorHandler</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000138"></a><b>raise_errors?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns whether the client raises an exception if there&#8217;s an error
+contacting the server. By default it will simulate a cache miss instead of
+raising an error.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000138_source')" id="l_M000138_source">show</a>
+                        
+                    </p>
+                    <div id="M000138_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 400</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raise_errors?</span>
+      <span class="ruby-identifier">service</span>.<span class="ruby-identifier">error_handler</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">StrictErrorHandler</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000136"></a><b>readonly?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns true if the cache was created read-only.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000136_source')" id="l_M000136_source">show</a>
+                        
+                    </p>
+                    <div id="M000136_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 389</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">readonly?</span>
+      <span class="ruby-ivar">@readonly</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000130"></a><b>replace</b>(key, value, expiration=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Replaces a key&#8217;s value, failing if item isn&#8217;t already in
+memcache.
+</p>
+<p>
+Unlike <a href="Memcache.html#M000125">add</a> and <a
+href="Memcache.html#M000130">replace</a>, this method always sets (or
+overwrites) the value in memcache, regardless of previous contents.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>key: Key to set.
+
+</li>
+<li>value: Value to set. Any type. If complex, will be marshaled.
+
+</li>
+<li>expiration: Optional expiration time, either relative number of seconds
+from current time (up to 1 month), an absolute Unix epoch time, or a <a
+href="../Time.html">Time</a>. By default, items never expire, though items
+may be evicted due to memory pressure.
+
+</li>
+</ul>
+<p>
+Returns true if replaced, false on cache miss.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000130_source')" id="l_M000130_source">show</a>
+                        
+                    </p>
+                    <div id="M000130_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 314</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">expiration</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">put</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">expiration</span>, <span class="ruby-constant">REPLACE</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000131"></a><b>replace_many</b>(pairs, expiration=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Replace multiple keys&#8217; values, failing if the items aren&#8217;t in
+memcache.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>pairs: Hash of keys to values, or Array of [key, value] pairs.
+
+</li>
+<li>expiration: Optional expiration time, either relative number of seconds
+from current time (up to 1 month), an absolute Unix epoch time, or a <a
+href="../Time.html">Time</a>. By default, items never expire, though items
+may be evicted due to memory pressure.
+
+</li>
+</ul>
+<p>
+Returns a list of keys whose values were NOT set. On total success this
+list should be empty.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000131_source')" id="l_M000131_source">show</a>
+                        
+                    </p>
+                    <div id="M000131_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 329</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">replace_many</span>(<span class="ruby-identifier">pairs</span>, <span class="ruby-identifier">expiration</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">put_many</span>(<span class="ruby-identifier">pairs</span>, <span class="ruby-identifier">expiration</span>, <span class="ruby-constant">REPLACE</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000141"></a><b>server_item_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000142"></a><b>server_malloc_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000143"></a><b>server_map_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000144"></a><b>server_reset_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000145"></a><b>server_size_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000146"></a><b>server_slab_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000147"></a><b>server_stats</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000148"></a><b>servers=</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Memcache.html#M000140">do_nothing</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000113"></a><b>service</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns the Java MemcacheService object used by this <a
+href="Memcache.html">Memcache</a> client.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000113_source')" id="l_M000113_source">show</a>
+                        
+                    </p>
+                    <div id="M000113_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 89</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">service</span>
+      <span class="ruby-ivar">@service</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">MemcacheServiceFactory</span>.<span class="ruby-identifier">memcache_service</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000127"></a><b>set</b>(key, value, expiration=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sets a key&#8217;s value, regardless of previous contents in cache.
+</p>
+<p>
+Unlike <a href="Memcache.html#M000125">add</a> and <a
+href="Memcache.html#M000130">replace</a>, this method always sets (or
+overwrites) the value in memcache, regardless of previous contents.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>key: Key to set.
+
+</li>
+<li>value: Value to set. Any type. If complex, will be marshaled.
+
+</li>
+<li>expiration: Optional expiration time, either relative number of seconds
+from current time (up to 1 month), an absolute Unix epoch time, or a <a
+href="../Time.html">Time</a>. By default, items never expire, though items
+may be evicted due to memory pressure.
+
+</li>
+</ul>
+<p>
+Returns true if set, false on error.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000127_source')" id="l_M000127_source">show</a>
+                        
+                    </p>
+                    <div id="M000127_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 267</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">expiration</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">put</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">expiration</span>, <span class="ruby-constant">SET</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000128"></a><b>set_many</b>(pairs, expiration=0)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Set multiple keys&#8217; values at once, regardless of previous contents.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>pairs: Hash of keys to values, or Array of [key, value] pairs.
+
+</li>
+<li>expiration: Optional expiration time, either relative number of seconds
+from current time (up to 1 month), an absolute Unix epoch time, or a <a
+href="../Time.html">Time</a>. By default, items never expire, though items
+may be evicted due to memory pressure.
+
+</li>
+</ul>
+<p>
+Returns a list of keys whose values were NOT set. On total success this
+list should be empty.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000128_source')" id="l_M000128_source">show</a>
+                        
+                    </p>
+                    <div id="M000128_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 282</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_many</span>(<span class="ruby-identifier">pairs</span>, <span class="ruby-identifier">expiration</span>=<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">put_many</span>(<span class="ruby-identifier">pairs</span>, <span class="ruby-identifier">expiration</span>, <span class="ruby-constant">SET</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000117"></a><b>stats</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Gets memcache statistics for this application.
+</p>
+<p>
+All of these statistics may reset due to various transient conditions. They
+provide the best information available at the time of being called.
+</p>
+<p>
+Returns a Hash mapping statistic names to associated values:
+</p>
+<dl>
+<dt>:hits</dt><dd>Number of cache get requests resulting in a cache hit.
+
+</dd>
+<dt>:misses</dt><dd>Number of cache get requests resulting in a cache miss.
+
+</dd>
+<dt>:byte_hits</dt><dd>Sum of bytes transferred on get requests. Rolls over to zero on overflow.
+
+</dd>
+<dt>:items</dt><dd>Number of key/value pairs in the cache.
+
+</dd>
+<dt>:bytes</dt><dd>Total size of all items in the cache.
+
+</dd>
+<dt>:oldest_item_age</dt><dd>How long in seconds since the oldest item in the cache was accessed.
+Effectively, this indicates how long a new item will survive in the cache
+without being accessed. This is <em>not</em> the amount of time that has
+elapsed since the item was created.
+
+</dd>
+</dl>
+<p>
+On error, returns <tt>nil</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000117_source')" id="l_M000117_source">show</a>
+                        
+                    </p>
+                    <div id="M000117_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/memcache.rb, line 136</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stats</span>
+      <span class="ruby-identifier">with_errors</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">stats</span> = <span class="ruby-identifier">service</span>.<span class="ruby-identifier">statistics</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">stats</span>
+            {
+              <span class="ruby-identifier">:hits</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stats</span>.<span class="ruby-identifier">hit_count</span>,
+              <span class="ruby-identifier">:misses</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stats</span>.<span class="ruby-identifier">miss_count</span>,
+              <span class="ruby-identifier">:byte_hits</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stats</span>.<span class="ruby-identifier">bytes_returned_for_hits</span>,
+              <span class="ruby-identifier">:items</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stats</span>.<span class="ruby-identifier">item_count</span>,
+              <span class="ruby-identifier">:bytes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stats</span>.<span class="ruby-identifier">total_item_bytes</span>,
+              <span class="ruby-identifier">:oldest_item_age</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stats</span>.<span class="ruby-identifier">max_time_without_access</span> <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>
+            }
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ServerError</span>
+          <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

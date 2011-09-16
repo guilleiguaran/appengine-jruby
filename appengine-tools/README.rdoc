@@ -1,0 +1,35 @@
+= AppEngine Tools
+
+AppEngine Tools gem provides dev_appserver.rb and appcfg.rb. The development
+server runs your application on your local computer for testing your
+application. The server simulates the App Engine datastore, services and
+sandbox restrictions. A multipurpose tool called appcfg.rb handles all
+command-line interaction with your application running on App Engine.
+
+== Extending the Java Platform to JRuby
+
+These tools work from standard Ruby, no need to install JRuby separately,
+everything you need installs as gems. Your app has access to all the Java APIs.
+
+== Rackup for app configuration
+
+The required XML configuration files are generated from the 'config.ru' file.
+
+ require 'appengine-rack'
+ AppEngine::Rack.configure_app(          
+     :application => "application-id",           
+     :precompilation_enabled => true,
+     :version => "1")
+ run lambda { Rack::Response.new("Hello").finish }
+
+== Bundler for Gem Management
+
+Simply list the gems you require in the 'Gemfile'
+
+ # Critical default settings:
+ disable_system_gems
+ disable_rubygems
+ bundle_path ".gems/bundler_gems"
+
+ # List gems to bundle here:
+ gem "appengine-rack"

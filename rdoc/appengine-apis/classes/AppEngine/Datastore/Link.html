@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Datastore::Link</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Datastore::Link</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/datastore_types_rb.html">lib/appengine-apis/datastore_types.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            String
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+A fully qualified URL. Usually http: scheme, but may also be file:, ftp:,
+news:, among others.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000022">new_from_java</a></li>
+        
+        <li><a href="#M000021">to_java</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000022"></a><b>new_from_java</b>(link)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000022_source')" id="l_M000022_source">show</a>
+                        
+                    </p>
+                    <div id="M000022_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 115</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_from_java</span>(<span class="ruby-identifier">link</span>)
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">link</span>.<span class="ruby-identifier">getValue</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000021"></a><b>to_java</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000021_source')" id="l_M000021_source">show</a>
+                        
+                    </p>
+                    <div id="M000021_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 111</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_java</span>
+        <span class="ruby-constant">JavaDatastore</span><span class="ruby-operator">::</span><span class="ruby-constant">Link</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_java_string</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

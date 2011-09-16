@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::URLFetch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Module</span><br />AppEngine::URLFetch</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/urlfetch_rb.html">lib/appengine-apis/urlfetch.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+The <a href="URLFetch.html">URLFetch</a> Service provides a way for user
+code to execute <a href="URLFetch.html#HTTP">HTTP</a> requests to external
+URLs.
+</p>
+<p>
+Chunked and hanging requests are not supported, and all content will be
+returned in a single block.
+</p>
+<p>
+URLFetch::HTTP also provides a drop-in replacement for <a
+href="../Net/HTTP.html">Net::HTTP</a>. To replace the standard
+implementation throughout your app you can do:
+</p>
+<pre>
+  require 'appengine-apis/urlfetch'
+  Net::HTTP = AppEngine::URLFetch::HTTP
+</pre>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000164">fetch</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="URLFetch/DownloadError.html">AppEngine::URLFetch::DownloadError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="URLFetch/InvalidURLError.html">AppEngine::URLFetch::InvalidURLError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="URLFetch/ResponseTooLargeError.html">AppEngine::URLFetch::ResponseTooLargeError</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">HTTP</td>
+            <td>=</td>
+            <td class="attr-value">Net::HTTP</td>
+        </tr>
+        
+        <tr valign='top'>
+            <td>&nbsp;</td>
+            <td colspan="2" class="attr-desc"><p>
+Deprecated alias for <a href="../Net/HTTP.html">Net::HTTP</a>, for
+backwards compatibility.
+</p>
+</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000164"></a><b>fetch</b>(url, options={})
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Fetches the given <a href="URLFetch.html#HTTP">HTTP</a> URL, blocking until
+the result is returned.
+</p>
+<p>
+Supported options:
+</p>
+<dl>
+<dt>:method</dt><dd>GET, POST, HEAD, PUT, or DELETE
+
+</dd>
+<dt>:payload</dt><dd>POST or PUT payload (implies method is not GET, HEAD, or DELETE)
+
+</dd>
+<dt>:headers</dt><dd><a href="URLFetch.html#HTTP">HTTP</a> headers to send with the request. May
+be a Hash or Net::HTTPHeaders.
+
+</dd>
+<dt>:allow_truncated</dt><dd>if true, truncate large responses and return them without error. otherwise,
+<a href="URLFetch/ResponseTooLargeError.html">ResponseTooLargeError</a>
+will be thrown when a response is truncated.
+
+</dd>
+<dt>:follow_redirects</dt><dd>if true (the default), redirects are transparently followed and the
+response (if less than 5 redirects) contains the final destination&#8217;s
+payload and the response status is 200. You lose, however, the redirect
+chaininformation. If false, you see the <a
+href="URLFetch.html#HTTP">HTTP</a> response yourself, including the
+&#8216;Location&#8217; header, and redirects are not followed.
+
+</dd>
+<dt>:deadline</dt><dd>Deadline, in seconds, for the request.
+
+</dd>
+</dl>
+<p>
+Returns a Net::HTTPResponse.
+</p>
+<p>
+Throws:
+</p>
+<ul>
+<li><a href="URLFetch/InvalidURLError.html">InvalidURLError</a> if the provided
+url is malformed.
+
+</li>
+<li><a href="URLFetch/DownloadError.html">DownloadError</a> if the remote
+service could not be contacted or the URL could not be fetched.
+
+</li>
+<li><a href="URLFetch/ResponseTooLargeError.html">ResponseTooLargeError</a> if
+response truncation has been disabled and the response is too large. Some
+responses are too large to even retrieve from the remote server, and in
+these cases the exception is thrown even if response truncation is enabled.
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000164_source')" id="l_M000164_source">show</a>
+                        
+                    </p>
+                    <div id="M000164_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/urlfetch.rb, line 85</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>={})
+      <span class="ruby-identifier">request</span> = <span class="ruby-identifier">build_urlfetch_request</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">java_response</span> = <span class="ruby-identifier">urlfetch_service</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">request</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">convert_urlfetch_body</span>(<span class="ruby-identifier">java_response</span>)
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">java</span>.<span class="ruby-identifier">lang</span>.<span class="ruby-constant">IllegalArgumentException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">java</span>.<span class="ruby-identifier">net</span>.<span class="ruby-constant">MalformedURLException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidURLError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">java</span>.<span class="ruby-identifier">io</span>.<span class="ruby-constant">IOException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">DownloadError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ResponseTooLargeException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ResponseTooLargeError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,5 @@
+
+if defined? JRuby::Rack
+  require 'action_controller/session/java_servlet_store'
+  ActionController::Base.session_store = :java_servlet_store
+end

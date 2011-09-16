@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::XMPP::Message</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::XMPP::Message</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/xmpp_rb.html">lib/appengine-apis/xmpp.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Represents an incoming or outgoing <a href="../XMPP.html">XMPP</a> <a
+href="Message.html">Message</a>. Also includes support for parsing chat
+commands. Commands are of the form
+</p>
+<pre>
+  /{command} {arg}?
+</pre>
+<p>
+A backslash is also recognized as the first character to support chat
+client which internally handle / commands.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000193">arg</a></li>
+        
+        <li><a href="#M000192">command</a></li>
+        
+        <li><a href="#M000190">new</a></li>
+        
+        <li><a href="#M000194">reply</a></li>
+        
+        <li><a href="#M000191">xml?</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">ARG_INDEX</td>
+            <td>=</td>
+            <td class="attr-value">{:to =&gt; 0, :body =&gt; 1, :from =&gt; 2, :type =&gt; 3, :xml =&gt; 4}</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">COMMAND_REGEX</td>
+            <td>=</td>
+            <td class="attr-value">/^[\\\/](\S+)(\s+(.+))?/</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>type</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>sender</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>recipients</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>body</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000190"></a><b>Message.new(to, body, from=nil, type=:chat, xml=false)
+or
+Message.new(options)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Constructor for sending an outgoing <a href="../XMPP.html">XMPP</a> message
+or parsing an incoming <a href="../XMPP.html">XMPP</a> message.
+</p>
+<p>
+Args / Options:
+</p>
+<dl>
+<dt>:to</dt><dd>Destination JID or array of JIDs for the message.
+
+</dd>
+<dt>:body</dt><dd>Body of the message.
+
+</dd>
+<dt>:from</dt><dd>Optional custom sender JID. The default is <appid>@appspot.com. Custom JIDs
+can be of the form <anything>@<appid>.appspotchat.com.
+
+</dd>
+<dt>:type</dt><dd>Optional type. Valid types are :chat, :error, :groupchat, :headline, and
+:normal. See RFC 3921, section 2.1.1. The default is :chat.
+
+</dd>
+<dt>:xml</dt><dd>If true specifies that the body should be interpreted as XML. If false, the
+contents of the body will be escaped and placed inside of a body element
+inside of the message. If true, the contents will be made children of the
+message.
+
+</dd>
+</dl>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000190_source')" id="l_M000190_source">show</a>
+                        
+                    </p>
+                    <div id="M000190_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/xmpp.rb, line 95</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Hash</span>
+          <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">options</span> = {}
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@recipients</span> = <span class="ruby-identifier">fetch_arg</span>(<span class="ruby-identifier">:to</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">args</span>)
+        <span class="ruby-ivar">@body</span> = <span class="ruby-identifier">fetch_arg</span>(<span class="ruby-identifier">:body</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">args</span>)
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@recipients</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@body</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Recipient and body are required.&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@recipients</span> = [<span class="ruby-ivar">@recipients</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@recipients</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Array</span>
+        
+        <span class="ruby-ivar">@sender</span> = <span class="ruby-identifier">fetch_arg</span>(<span class="ruby-identifier">:from</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">args</span>)
+        <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">fetch_arg</span>(<span class="ruby-identifier">:type</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">args</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">:chat</span>
+        <span class="ruby-ivar">@xml</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">fetch_arg</span>(<span class="ruby-identifier">:xml</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000193"></a><b>arg</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+If this message contains a chat command, returns the command argument.
+Otherwise, returns the message body.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000193_source')" id="l_M000193_source">show</a>
+                        
+                    </p>
+                    <div id="M000193_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/xmpp.rb, line 127</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">arg</span>
+        <span class="ruby-identifier">parse_command</span>
+        <span class="ruby-ivar">@arg</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000192"></a><b>command</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns the command if this message contains a chat command.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000192_source')" id="l_M000192_source">show</a>
+                        
+                    </p>
+                    <div id="M000192_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/xmpp.rb, line 120</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">command</span>
+        <span class="ruby-identifier">parse_command</span>
+        <span class="ruby-ivar">@command</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000194"></a><b>reply</b>(body, type=:chat, xml=false)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Convenience method to reply to a message.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000194_source')" id="l_M000194_source">show</a>
+                        
+                    </p>
+                    <div id="M000194_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/xmpp.rb, line 133</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reply</span>(<span class="ruby-identifier">body</span>, <span class="ruby-identifier">type</span>=<span class="ruby-identifier">:chat</span>, <span class="ruby-identifier">xml</span>=<span class="ruby-keyword kw">false</span>)
+        <span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">sender</span>], <span class="ruby-identifier">body</span>, <span class="ruby-identifier">recipients</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">type</span>, <span class="ruby-identifier">xml</span>)
+        <span class="ruby-constant">XMPP</span>.<span class="ruby-identifier">send_message</span>(<span class="ruby-identifier">message</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000191"></a><b>xml?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000191_source')" id="l_M000191_source">show</a>
+                        
+                    </p>
+                    <div id="M000191_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/xmpp.rb, line 115</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xml?</span>
+        <span class="ruby-ivar">@xml</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

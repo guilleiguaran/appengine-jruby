@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Module</span><br />AppEngine::Users</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/users_rb.html">lib/appengine-apis/users.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+<a href="Users.html">Users</a> provides information useful for forcing a
+user to log in or out, and retrieving information about the user who is
+currently logged-in.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000182">admin?</a></li>
+        
+        <li><a href="#M000179">create_login_url</a></li>
+        
+        <li><a href="#M000180">create_logout_url</a></li>
+        
+        <li><a href="#M000178">current_user</a></li>
+        
+        <li><a href="#M000181">logged_in?</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="Users/User.html">AppEngine::Users::User</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">Service</td>
+            <td>=</td>
+            <td class="attr-value">UserServiceFactory.getUserService</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000182"></a><b>admin?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns true if the user making this request is an admin for this
+application, false otherwise.
+</p>
+<p>
+This is a separate function, and not a member function of the <a
+href="Users/User.html">User</a> class, because admin status is not
+persisted in the datastore. It only exists for the user making this request
+right now.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000182_source')" id="l_M000182_source">show</a>
+                        
+                    </p>
+                    <div id="M000182_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/users.rb, line 68</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">admin?</span>
+        <span class="ruby-constant">Service</span>.<span class="ruby-identifier">is_user_admin?</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000179"></a><b>create_login_url</b>(url)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Computes the login URL for this request and specified destination URL.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>dest_url: The desired final destination URL for the user
+
+<pre>
+          once login is complete. If +dest_url+ does not have a host
+          specified, we will use the host from the current request.
+</pre>
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000179_source')" id="l_M000179_source">show</a>
+                        
+                    </p>
+                    <div id="M000179_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/users.rb, line 43</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_login_url</span>(<span class="ruby-identifier">url</span>)
+        <span class="ruby-constant">Service</span>.<span class="ruby-identifier">create_login_url</span>(<span class="ruby-identifier">url</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000180"></a><b>create_logout_url</b>(url)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Computes the logout URL for this request and specified destination URL.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>dest_url: String that is the desired final destination URL for the
+
+<pre>
+          user once logout is complete. If +dest_url+ does not have
+          a host specified, uses the host from the current request.
+</pre>
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000180_source')" id="l_M000180_source">show</a>
+                        
+                    </p>
+                    <div id="M000180_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/users.rb, line 53</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_logout_url</span>(<span class="ruby-identifier">url</span>)
+        <span class="ruby-constant">Service</span>.<span class="ruby-identifier">create_logout_url</span>(<span class="ruby-identifier">url</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000178"></a><b>current_user</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+If the user is logged in, this method will return a <a
+href="Users/User.html">User</a> that contains information about them. Note
+that repeated calls may not necessarily return the same <a
+href="Users/User.html">User</a> object.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000178_source')" id="l_M000178_source">show</a>
+                        
+                    </p>
+                    <div id="M000178_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/users.rb, line 33</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_user</span>
+        <span class="ruby-constant">Service</span>.<span class="ruby-identifier">current_user</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000181"></a><b>logged_in?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns true if there is a user logged in, false otherwise.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000181_source')" id="l_M000181_source">show</a>
+                        
+                    </p>
+                    <div id="M000181_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/users.rb, line 58</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">logged_in?</span>
+        <span class="ruby-constant">Service</span>.<span class="ruby-identifier">is_user_logged_in?</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,10 @@
+.hg
+.hgignore
+appengine-sdk/appengine-java-sdk-*
+appengine-sdk/appengine-java-sdk-*.zip
+appengine-apis/doc/
+WEB-INF
+pkg/
+appengine-sdk/lib/appengine-sdk.rb
+.DS_Store
+updatecheck

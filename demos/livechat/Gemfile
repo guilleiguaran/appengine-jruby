@@ -1,0 +1,18 @@
+disable_system_gems
+disable_rubygems
+bundle_path ".gems/bundler_gems"
+
+clear_sources
+#source 'http://gems.github.com'
+#source 'http://rc-gems.appspot.com'
+source 'http://gemcutter.org'
+
+gem "sinatra"
+gem "json"
+gem "dm-core"
+gem "dm-appengine"
+#gem "dm-validations"
+gem "dm-timestamps"
+gem "dm-serializer"
+gem "dm-ar-finders"
+gem "haml"

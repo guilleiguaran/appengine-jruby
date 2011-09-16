@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Labs::TaskQueue::Queue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Labs::TaskQueue::Queue</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../../files/lib/appengine-apis/labs/taskqueue_rb.html">lib/appengine-apis/labs/taskqueue.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Represents a <a href="Queue.html">Queue</a>.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000096">add</a></li>
+        
+        <li><a href="#M000098">java_queue</a></li>
+        
+        <li><a href="#M000097">name</a></li>
+        
+        <li><a href="#M000095">new</a></li>
+        
+        <li><a href="#M000094">new</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000094"></a><b>new</b>(name=nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns the named <a href="Queue.html">Queue</a>, or the default queue if
+name is nil.
+</p>
+<p>
+The returned <a href="Queue.html">Queue</a> object may not necessarily
+refer to an existing queue. Queues must be configured before they may be
+used. Attempting to use a non-existing queue name may result in errors at
+the point of use of the <a href="Queue.html">Queue</a> object, not when
+creating it.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000094_source')" id="l_M000094_source">show</a>
+                        
+                    </p>
+                    <div id="M000094_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 203</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>=<span class="ruby-keyword kw">nil</span>)
+          <span class="ruby-constant">TaskQueue</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>
+              <span class="ruby-ivar">@queue</span> = <span class="ruby-constant">QueueFactory</span>.<span class="ruby-identifier">default_queue</span>
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-ivar">@queue</span> = <span class="ruby-constant">QueueFactory</span>.<span class="ruby-identifier">get_queue</span>(<span class="ruby-identifier">name</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000095"></a><b>new</b>(name=nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000095_source')" id="l_M000095_source">show</a>
+                        
+                    </p>
+                    <div id="M000095_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 213</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>=<span class="ruby-keyword kw">nil</span>)
+          <span class="ruby-ivar">@queues</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">super</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000096"></a><b>add</b>(task=nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Submits a task to this queue.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000096_source')" id="l_M000096_source">show</a>
+                        
+                    </p>
+                    <div id="M000096_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 218</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">task</span>=<span class="ruby-keyword kw">nil</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">nil?</span>
+            <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add</span>(<span class="ruby-keyword kw">self</span>)
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">java_kind_of?</span> <span class="ruby-constant">TaskOptions</span>
+            <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">task</span>).<span class="ruby-identifier">add</span>(<span class="ruby-keyword kw">self</span>)
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">task</span>.<span class="ruby-identifier">add</span>(<span class="ruby-keyword kw">self</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000098"></a><b>java_queue</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000098_source')" id="l_M000098_source">show</a>
+                        
+                    </p>
+                    <div id="M000098_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 233</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">java_queue</span>
+          <span class="ruby-ivar">@queue</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000097"></a><b>name</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns the name of this queue.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000097_source')" id="l_M000097_source">show</a>
+                        
+                    </p>
+                    <div id="M000097_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 229</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>
+          <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">queue_name</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,202 @@
+a {
+  color: #00F;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #77F;
+  text-decoration: underline;
+}
+
+body, td, p {
+  font-family: arial, sans-serif;
+  background: #FFF;
+  color: #000;
+  margin: 0px;
+  font-size: small;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+#content {
+  margin: 2em;
+  margin-left: 3.5em;
+  margin-right: 3.5em;
+}
+
+#description p {
+  margin-bottom: 0.5em;
+}
+
+h1, h2, .sectiontitle {
+  font-weight: bold;
+  color: #000;
+  background: #E5ECF9;
+  border: 1px solid #3366CC;       
+}
+
+.sectiontitle {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  padding-left: 2em;
+}
+
+.attr-rw {
+  padding-left: 1em;
+  padding-right: 1em;
+  text-align: center;
+  color: #055;
+}
+
+.attr-name {
+  font-weight: bold;
+}
+
+.attr-desc {
+}
+
+.attr-desc p {
+    margin-top: 0;
+}
+
+.attr-value {
+  font-family: monospace;
+}
+
+.file-title-prefix {
+  font-size: large;
+}
+
+.file-title {
+  font-size: large;
+  font-weight: bold;
+  background: #E5ECF9;
+  color: #000;
+}
+
+.banner {
+  background: #E5ECF9;
+  color: #000;
+  padding: 1em;
+}
+
+.banner td {
+  background: transparent;
+  color: #000;
+}
+/*
+h1 a, h2 a, .sectiontitle a, .banner a {
+  color: #FF0;
+}
+
+h1 a:hover, h2 a:hover, .sectiontitle a:hover, .banner a:hover {
+  color: #FF7;
+}*/
+
+.dyn-source {
+  display: none;
+  border: #3366CC dotted 1px;
+  margin: 0.5em 2em 0.5em 2em;
+  padding: 0.5em;
+}
+
+.dyn-source .cmt {
+  color: #07F;
+  font-style: italic;
+}
+
+.dyn-source .kw {
+  color: #00F;
+  font-weight: bold;
+}
+
+.ruby-value {
+  color: #00A;
+}
+
+.ruby-ivar {
+  color: #318495;
+}
+
+.ruby-node {
+  color: #036a07
+}
+
+.ruby-constant {
+  color: #585cf6;
+  font-weight: bold
+}
+
+.method {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.description pre {
+  padding: 0.5em;
+  border: #3366CC dotted 1px;
+}
+
+.method .title {
+  font-family: monospace;
+  font-size: large;
+  border-bottom: 1px dashed black;
+  margin-bottom: 0.3em;
+  padding-bottom: 0.1em;
+}
+
+.method .description, .method .sourcecode {
+  margin-left: 1em;
+}
+
+.description p, .sourcecode p {
+  margin-bottom: 0.5em;
+}
+
+.method .sourcecode p.source-link {
+  text-indent: 0em;
+  margin-top: 0.5em;
+}
+
+.method .aka {
+  margin-top: 0.3em;
+  margin-left: 1em;
+  font-style: italic;
+  text-indent: 2em;
+}
+
+h1 {
+  padding: 1em;
+  margin-left: -1.5em;
+  font-size: x-large;
+}
+
+h2 {
+  padding: 0.5em 1em 0.5em 1em;
+  margin-left: -1.5em;
+  font-size: large;
+}
+
+h3, h4, h5, h6 {
+  color: #220088;
+  border-bottom: #5522bb solid 1px;
+}
+
+.sourcecode > pre {
+  padding: 0.5em;
+  border: 1px dotted 3366CC;
+  background: #FFE;
+}
+
+dt {
+  font-weight: bold
+}
+
+dd {
+  margin-bottom: 0.7em;
+}

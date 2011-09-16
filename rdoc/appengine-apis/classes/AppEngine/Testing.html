@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Testing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Module</span><br />AppEngine::Testing</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/testing_rb.html">lib/appengine-apis/testing.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Local testing support for Google App Engine
+</p>
+<p>
+If you run your code on Google&#8217;s servers or under dev_appserver, the
+api&#8217;s are already configured.
+</p>
+<p>
+To run outside this environment, you need to install a test environment and
+api stubs.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000167">app_dir</a></li>
+        
+        <li><a href="#M000168">app_dir=</a></li>
+        
+        <li><a href="#M000172">boot</a></li>
+        
+        <li><a href="#M000174">get_app_id</a></li>
+        
+        <li><a href="#M000171">install_api_stubs</a></li>
+        
+        <li><a href="#M000170">install_test_datastore</a></li>
+        
+        <li><a href="#M000165">install_test_env</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="Testing/TestEnv.html">AppEngine::Testing::TestEnv</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000167"></a><b>app_dir</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+The application directory, or &#8217;.&#8217; if not set. Composite index
+definitions are written to &#8220;#{<a
+href="Testing.html#M000167">app_dir</a>}/WEB-INF/&#8221;.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000167_source')" id="l_M000167_source">show</a>
+                        
+                    </p>
+                    <div id="M000167_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 121</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">app_dir</span>
+        <span class="ruby-identifier">file</span> = <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">getApplicationDirectory</span>
+        <span class="ruby-identifier">file</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">path</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000168"></a><b>app_dir=</b>(dir)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sets the application directory. Should be called before creating stubs.
+</p>
+<p>
+Composite index definitions are written to &#8220;#{<a
+href="Testing.html#M000167">app_dir</a>}/WEB-INF/&#8221;.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000168_source')" id="l_M000168_source">show</a>
+                        
+                    </p>
+                    <div id="M000168_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 130</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">app_dir=</span>(<span class="ruby-identifier">dir</span>)
+        <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">setApplicationDirectory</span>(<span class="ruby-identifier">java</span>.<span class="ruby-identifier">io</span>.<span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>))
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000172"></a><b>boot</b>(app_dir=nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Loads stub API implementations if no API implementation is currently
+configured.
+</p>
+<p>
+Sets up a datastore saved to disk in <tt><a
+href="Testing.html#M000167">app_dir</a></tt>. <tt><a
+href="Testing.html#M000167">app_dir</a></tt> defaults to
+ENV[&#8216;APPLICATION_ROOT&#8217;] or &#8217;.&#8217; if not specified.
+</p>
+<p>
+Does nothing is APIs are already configured (e.g. in production).
+</p>
+<p>
+As a shortcut you can use
+</p>
+<pre>
+  require 'appengine-apis/local_boot'
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000172_source')" id="l_M000172_source">show</a>
+                        
+                    </p>
+                    <div id="M000172_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 184</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">boot</span>(<span class="ruby-identifier">app_dir</span>=<span class="ruby-keyword kw">nil</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">ApiProxy</span>.<span class="ruby-identifier">current_environment</span> <span class="ruby-operator">&amp;&amp;</span>
+            <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">ApiProxy</span>.<span class="ruby-identifier">getDelegate</span>
+          <span class="ruby-keyword kw">return</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">app_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'APPLICATION_ROOT'</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">'.'</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">ApiProxy</span>.<span class="ruby-identifier">current_environment</span>
+          <span class="ruby-identifier">env</span> = <span class="ruby-identifier">install_test_env</span>
+          <span class="ruby-identifier">appid</span> = <span class="ruby-identifier">get_app_id</span>(<span class="ruby-identifier">app_dir</span>)
+          <span class="ruby-identifier">env</span>.<span class="ruby-identifier">appid</span> = <span class="ruby-identifier">appid</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">appid</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">ApiProxy</span>.<span class="ruby-identifier">getDelegate</span>
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">app_dir</span> = <span class="ruby-identifier">app_dir</span>
+          <span class="ruby-identifier">install_api_stubs</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000174"></a><b>get_app_id</b>(app_dir)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Looks for app.yaml or WEB-INF/appengine-web.xml in <tt><a
+href="Testing.html#M000167">app_dir</a></tt> and parses the application id.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000174_source')" id="l_M000174_source">show</a>
+                        
+                    </p>
+                    <div id="M000174_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 203</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_app_id</span>(<span class="ruby-identifier">app_dir</span>)
+        <span class="ruby-identifier">require</span> <span class="ruby-value str">'appengine-rack'</span>
+        <span class="ruby-identifier">app_id</span> = <span class="ruby-constant">AppEngine</span><span class="ruby-operator">::</span><span class="ruby-constant">Rack</span>.<span class="ruby-identifier">app</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">app_id</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">app_id</span>
+        <span class="ruby-identifier">aeweb_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">app_dir</span>, <span class="ruby-value str">'WEB-INF'</span>, <span class="ruby-value str">'appengine-web.xml'</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">aeweb_path</span>)
+          <span class="ruby-identifier">require</span> <span class="ruby-value str">'rexml/document'</span>
+          <span class="ruby-identifier">aeweb</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">aeweb_path</span>))
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">aeweb</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">elements</span>[<span class="ruby-value str">'application'</span>].<span class="ruby-identifier">text</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000171"></a><b>install_api_stubs</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Install stub apis. The datastore will be written to the disk inside <a
+href="Testing.html#M000167">app_dir</a>.
+</p>
+<p>
+You could potentially use this to run under a ruby web server instead of
+dev_appserver. In that case you will need to install and configure a test
+environment for each request.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000171_source')" id="l_M000171_source">show</a>
+                        
+                    </p>
+                    <div id="M000171_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 160</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_api_stubs</span>
+        <span class="ruby-identifier">current_delegate</span> = <span class="ruby-constant">ApiProxy</span>.<span class="ruby-identifier">getDelegate</span>
+        <span class="ruby-identifier">current_delegate</span>.<span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_delegate</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:stop</span>
+
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">app_dir</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">app_dir</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">delegate</span> = <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">create</span>
+        <span class="ruby-constant">ApiProxy</span><span class="ruby-operator">::</span><span class="ruby-identifier">setDelegate</span>(<span class="ruby-identifier">delegate</span>)
+        <span class="ruby-identifier">at_exit</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">delegate</span>.<span class="ruby-identifier">stop</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">delegate</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000170"></a><b>install_test_datastore</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Install stub apis and force all datastore operations to use an in-memory
+datastore.
+</p>
+<p>
+You may call this multiple times to reset to a new in-memory datastore.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000170_source')" id="l_M000170_source">show</a>
+                        
+                    </p>
+                    <div id="M000170_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 138</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_test_datastore</span>
+        <span class="ruby-identifier">delegate</span> = <span class="ruby-identifier">install_api_stubs</span>
+        <span class="ruby-identifier">lds</span> = <span class="ruby-constant">Java</span>.<span class="ruby-constant">ComGoogleAppengineApiDatastoreDev</span>.<span class="ruby-constant">LocalDatastoreService</span>
+        
+        <span class="ruby-identifier">delegate</span>.<span class="ruby-identifier">set_property</span>(
+            <span class="ruby-identifier">lds</span><span class="ruby-operator">::</span><span class="ruby-constant">NO_STORAGE_PROPERTY</span>, <span class="ruby-value str">&quot;true&quot;</span>)
+        <span class="ruby-identifier">delegate</span>.<span class="ruby-identifier">set_property</span>(
+            <span class="ruby-identifier">lds</span><span class="ruby-operator">::</span><span class="ruby-constant">MAX_QUERY_LIFETIME_PROPERTY</span>,
+            <span class="ruby-identifier">java</span>.<span class="ruby-identifier">lang</span>.<span class="ruby-constant">Integer</span><span class="ruby-operator">::</span><span class="ruby-constant">MAX_VALUE</span>.<span class="ruby-identifier">to_s</span>)
+        <span class="ruby-identifier">delegate</span>.<span class="ruby-identifier">set_property</span>(
+            <span class="ruby-identifier">lds</span><span class="ruby-operator">::</span><span class="ruby-constant">MAX_TRANSACTION_LIFETIME_PROPERTY</span>,
+            <span class="ruby-identifier">java</span>.<span class="ruby-identifier">lang</span>.<span class="ruby-constant">Integer</span><span class="ruby-operator">::</span><span class="ruby-constant">MAX_VALUE</span>.<span class="ruby-identifier">to_s</span>)
+        <span class="ruby-constant">ApiProxy</span><span class="ruby-operator">::</span><span class="ruby-identifier">setDelegate</span>(<span class="ruby-identifier">delegate</span>)
+        <span class="ruby-identifier">delegate</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000165"></a><b>install_test_env</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Install a test environment for the current thread.
+</p>
+<p>
+You must call this before making any api calls.
+</p>
+<p>
+Note that Google&#8217;s production and local environments are single
+threaded. You may run into problems if you use multiple threads.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000165_source')" id="l_M000165_source">show</a>
+                        
+                    </p>
+                    <div id="M000165_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/testing.rb, line 104</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_test_env</span>
+        <span class="ruby-identifier">env</span> = <span class="ruby-constant">TestEnv</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-constant">ApiProxy</span><span class="ruby-operator">::</span><span class="ruby-identifier">setEnvironmentForCurrentThread</span>(<span class="ruby-identifier">env</span>)
+        <span class="ruby-identifier">env</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

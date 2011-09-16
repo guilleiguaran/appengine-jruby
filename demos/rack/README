@@ -1,0 +1,14 @@
+# Install the google-appengine gem
+$ sudo gem install google-appengine
+
+# Start the development server
+$ dev_appserver.rb .
+
+# Create an application-id at appspot.com:
+http://appengine.google.com/start/createapp
+
+# Replace the application-id in config.ru
+:application => "your-app-id"
+
+# Upload to App Engine
+$ appcfg.rb update .

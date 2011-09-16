@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Labs::TaskQueue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Module</span><br />AppEngine::Labs::TaskQueue</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/labs/taskqueue_rb.html">lib/appengine-apis/labs/taskqueue.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000099">add</a></li>
+        
+        <li><a href="#M000100">convert_exceptions</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="TaskQueue/InternalError.html">AppEngine::Labs::TaskQueue::InternalError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="TaskQueue/Queue.html">AppEngine::Labs::TaskQueue::Queue</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="TaskQueue/Task.html">AppEngine::Labs::TaskQueue::Task</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="TaskQueue/TaskAlreadyExistsError.html">AppEngine::Labs::TaskQueue::TaskAlreadyExistsError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="TaskQueue/TransientFailureError.html">AppEngine::Labs::TaskQueue::TransientFailureError</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">Blob</td>
+            <td>=</td>
+            <td class="attr-value">AppEngine::Datastore::Blob</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000099"></a><b>add</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Convenience method will create a <a href="TaskQueue/Task.html">Task</a> and
+add it to the default queue.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>args: Passed to the <a href="TaskQueue/Task.html">Task</a> constructor.
+
+</li>
+</ul>
+<p>
+Returns:
+</p>
+<ul>
+<li>The <a href="TaskQueue/Task.html">Task</a> that was added to the queue.
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000099_source')" id="l_M000099_source">show</a>
+                        
+                    </p>
+                    <div id="M000099_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 245</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+        <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>).<span class="ruby-identifier">add</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000100"></a><b>convert_exceptions</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000100_source')" id="l_M000100_source">show</a>
+                        
+                    </p>
+                    <div id="M000100_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/labs/taskqueue.rb, line 249</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">convert_exceptions</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-keyword kw">yield</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">java</span>.<span class="ruby-identifier">lang</span>.<span class="ruby-constant">IllegalArgumentException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">UnsupportedTranslationException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">TaskAlreadyExistsException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">TaskAlreadExistsError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">InternalFailureException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">InternalError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">TransientFailureException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">TransientFailureError</span>, <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

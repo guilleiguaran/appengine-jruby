@@ -1,0 +1,14 @@
+#chatUserList{
+    text-align: left;
+    border: 1px solid blue;
+    overflow-y: scroll;
+}
+#chatMessageList{
+    text-align: left;
+    border: 1px solid green;
+    overflow-y: scroll;
+}
+#newChatContainer{
+    text-align: left;
+    border: 1px solid red;
+}

@@ -1,0 +1,116 @@
+require 'rubygems' unless ENV['NO_RUBYGEMS']
+require 'rubygems/builder'
+require 'rubygems/specification'
+require 'date'
+require 'erb'
+require 'fileutils'
+
+module AppEngine
+  module SDK
+  end
+end
+
+def find_version
+  unless defined? AppEngine::SDK::VERSION
+    re = /^appengine-java-sdk-(\d+[.]\d+[.]\d+([.]\w+)?).+zip$/
+    root = File.dirname(__FILE__)
+    jars = Dir.new(root).grep(re)
+    versions = jars.map do |jar|
+      if jar =~ re
+        $1.split('.').map do |i|
+          if i =~ /^\d+$/
+            i.to_i
+          else
+            i
+          end
+        end
+      end
+    end
+    if versions.size > 0
+      return versions.sort[-1].join('.')
+    else
+      # TODO find current version and download it
+      puts "Unable to determine version."
+      puts "Please download appengine-java-sdk-x.x.x.zip to this directory."
+      exit 1
+    end
+  end
+  return AppEngine::SDK::Version
+end
+
+def version_binding
+  version = find_version
+  binding
+end
+
+version = find_version
+
+RBFILE = "lib/appengine-sdk.rb"
+ERBFILE = "appengine-sdk.erb"
+ZIPFILE = File.expand_path("appengine-java-sdk-#{version}.zip")
+SDK_ROOT = "appengine-java-sdk-#{version}"
+ASM_STIFLE = "com.google.appengine.tools.development.agent.impl.Transformer"
+MISSING_FILE = "com.google.appengine.tools.development.LocalResourceFileServlet"
+
+directory 'lib'
+
+file RBFILE => [ERBFILE, 'lib'] do
+  erb = ERB.new(IO.read(ERBFILE))
+  open(RBFILE, "w") do |f|
+    f << erb.result(version_binding)
+  end
+end
+
+def check_system(*args)
+  puts args.join(" ")
+  unless system(*args)
+    puts "Error running #{args[0].inspect}"
+    exit($?)
+  end
+end
+
+directory 'pkg'
+
+task :gem => [SDK_ROOT, RBFILE, 'pkg'] do
+  spec = Gem::Specification.new do |s|
+    s.name = "appengine-sdk"
+    s.version = version
+    s.author = "Ryan Brown"
+    s.email = "ribrdb@google.com"
+    s.homepage = "http://code.google.com/p/appengine-jruby"
+    s.description = s.summary = "Google App Engine SDK for Java."
+
+    s.platform = Gem::Platform::RUBY
+
+    s.require_path = 'lib'
+    s.files = [RBFILE, 'COPYING'] + Dir.glob("#{SDK_ROOT}/**/*")
+  end
+  filename = Gem::Builder.new(spec).build
+  mv filename, "pkg/#{filename}"
+end
+
+file SDK_ROOT => [ZIPFILE, 'Rakefile'] do
+  Dir.chdir File.dirname(__FILE__) do
+    verbose(true) do
+      rm_rf(SDK_ROOT)
+      check_system("unzip", ZIPFILE)
+      Dir.chdir(SDK_ROOT) do
+        rm_rf(%w(bin demos))
+        rm_rf(Dir.glob('*.ORM'))
+        rm_rf(Dir.glob('**/orm'))
+        File.open('config/sdk/logging.properties', "a") do |props|
+      # props << "#{ASM_STIFLE}.level=OFF\n"
+        props << "#{MISSING_FILE}.level=SEVERE\n"
+        end
+        chmod(0644, Dir.glob('lib/**/*.jar'))
+        # copy api jars to appengine-apis
+        glob = "appengine-api-{1.0-sdk,labs}-*.jar"
+        jars = Dir.glob("lib/user/#{glob}")
+        Dir.glob("../../appengine-apis/lib/*.jar").each{|old| rm old}
+        jars.each {|jar| cp jar, "../../appengine-apis/lib"}
+      end
+    end
+  end
+end
+
+task :default => :gem

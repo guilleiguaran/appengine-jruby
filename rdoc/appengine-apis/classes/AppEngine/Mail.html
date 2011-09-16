@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Mail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Module</span><br />AppEngine::Mail</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/mail_rb.html">lib/appengine-apis/mail.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+App Engine applications can send email messages on behalf of the
+app&#8217;s administrators, and on behalf of users with Google Accounts.
+Apps use the <a href="Mail.html">Mail</a> service to send email messages.
+</p>
+<p>
+The <a href="Mail.html#M000106">Mail.send</a> method sends an email message
+from the application. The From: address can be either the email address of
+a registered administrator (developer) of the application, or the current
+user if signed in with Google Accounts.
+</p>
+<p>
+The following example sends an email message to the user as confirmation
+that the user created a new account with the application:
+</p>
+<pre>
+  class SignupController &lt; Merb::Controller
+    def confirm(self):
+      user_address = params[:email_address&quot;]
+     confirmation_url = create_new_user_confirmation
+     sender_address = &quot;support@example.com&quot;
+     subject = &quot;Confirm your registration&quot;
+     body = &lt;&lt;EOM
+  Thank you for creating an account!  Please confirm your email address by
+  clicking on the link below:
+
+  #{confirmation_url}
+  EOM
+
+     AppEngine::Mail.send(sender_address, user_address, subject, body)
+   end
+ end
+</pre>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000108">create_java_message</a></li>
+        
+        <li><a href="#M000106">send</a></li>
+        
+        <li><a href="#M000107">send_to_admins</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000108"></a><b>create_java_message</b>(options)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Creates a Java MailService.Message object.
+</p>
+<p>
+Supported options:
+</p>
+<dl>
+<dt>:atttachments</dt><dd>Attachments to send with this message. Should be a Hash of
+{&#8220;filename&#8221; => &#8220;data&#8221;} or an Array of
+[[&#8220;filename&#8221;, &#8220;data&#8221;], &#8230;].
+
+</dd>
+<dt>:bcc</dt><dd>Must be a String or an Array of Strings if set.
+
+</dd>
+<dt>:cc</dt><dd>Must be a String or an Array of Strings if set.
+
+</dd>
+<dt>:html</dt><dd>The html body of the message. Must not be <tt>nil</tt> if <tt>text</tt> is
+nil.
+
+</dd>
+<dt>:reply_to</dt><dd>Must be a valid email address if set.
+
+</dd>
+</dl>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000108_source')" id="l_M000108_source">show</a>
+                        
+                    </p>
+                    <div id="M000108_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/mail.rb, line 118</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_java_message</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:text_body</span>] = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:text</span>)
+      <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:html_body</span>] = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:html</span>)
+      <span class="ruby-identifier">attachments</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:attachments</span>]
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">attachments</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:attachments</span>] = <span class="ruby-identifier">attachments</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filename</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">MailService</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_java_bytes</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      [<span class="ruby-identifier">:to</span>, <span class="ruby-identifier">:cc</span>, <span class="ruby-identifier">:bcc</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">value</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">key</span>]
+        <span class="ruby-identifier">options</span>[<span class="ruby-identifier">key</span>] = [<span class="ruby-identifier">value</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">message</span> = <span class="ruby-constant">MailService</span><span class="ruby-operator">::</span><span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">message</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;set_#{key}&quot;</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid option #{key.inspect}.&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">message</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000106"></a><b>send</b>(sender, to, subject, text, options={})
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sends an email.
+</p>
+<p>
+The message will be delivered asynchronously, and delivery problems will
+result in a bounce to the specified sender.
+</p>
+<p>
+Args:
+</p>
+<dl>
+<dt>sender</dt><dd>The From: field of the email. Must correspond to the valid email address of
+one of the admins for this application, or to the email address of the
+currently logged-in user.
+
+</dd>
+<dt>to</dt><dd>Message recipient(s). Should be an email address, or an Array of email
+addresses.
+
+</dd>
+<dt>subject</dt><dd>Subject of the message.
+
+</dd>
+<dt>text</dt><dd>Plain text body of the message. To send an HTML only email, set
+<tt>text</tt> to nil and use the <tt>:html</tt> option.
+
+</dd>
+<dt>options</dt><dd>See <a href="Mail.html#M000108">create_java_message</a> for supported
+options.
+
+</dd>
+</dl>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000106_source')" id="l_M000106_source">show</a>
+                        
+                    </p>
+                    <div id="M000106_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/mail.rb, line 70</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send</span>(<span class="ruby-identifier">sender</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={})
+      <span class="ruby-identifier">orig_options</span> = <span class="ruby-identifier">options</span>
+      <span class="ruby-identifier">options</span> = {
+        <span class="ruby-identifier">:sender</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sender</span>,
+        <span class="ruby-identifier">:to</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to</span> <span class="ruby-operator">||</span> [],
+        <span class="ruby-identifier">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">subject</span>,
+        <span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">text</span>
+      }
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">orig_options</span>)
+      <span class="ruby-identifier">message</span> = <span class="ruby-identifier">create_java_message</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">convert_mail_exceptions</span> { <span class="ruby-identifier">service</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">message</span>) }
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000107"></a><b>send_to_admins</b>(sender, subject, text, options={})
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sends an email alert to all admins of an application.
+</p>
+<p>
+The message will be delivered asynchronously, and delivery problems will
+result in a bounce to the admins.
+</p>
+<p>
+Args:
+</p>
+<dl>
+<dt>sender</dt><dd>The From: field of the email. Must correspond to the valid email address of
+one of the admins for this application, or to the email address of the
+currently logged-in user.
+
+</dd>
+<dt>subject</dt><dd>Subject of the message.
+
+</dd>
+<dt>text</dt><dd>Plain text body of the message. To send an HTML only email, set
+<tt>text</tt> to nil and use the <tt>:html</tt> option.
+
+</dd>
+<dt>options</dt><dd>See <a href="Mail.html#M000108">create_java_message</a> for supported
+options.
+
+</dd>
+</dl>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000107_source')" id="l_M000107_source">show</a>
+                        
+                    </p>
+                    <div id="M000107_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/mail.rb, line 96</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_to_admins</span>(<span class="ruby-identifier">sender</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={})
+      <span class="ruby-identifier">orig_options</span> = <span class="ruby-identifier">options</span>
+      <span class="ruby-identifier">options</span> = {
+        <span class="ruby-identifier">:sender</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sender</span>,
+        <span class="ruby-identifier">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">subject</span>,
+        <span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">text</span>
+      }
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">orig_options</span>)
+      <span class="ruby-identifier">message</span> = <span class="ruby-identifier">create_java_message</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">convert_mail_exceptions</span> { <span class="ruby-identifier">service</span>.<span class="ruby-identifier">send_to_admins</span>(<span class="ruby-identifier">message</span>) }
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

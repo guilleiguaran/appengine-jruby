@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Datastore::Query</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Datastore::Query</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/datastore_rb.html">lib/appengine-apis/datastore.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+<a href="Query.html">Query</a> encapsulates a request for zero or more <a
+href="Entity.html">Entity</a> objects out of the datastore. It supports
+querying on zero or more properties, querying by ancestor, and sorting. <a
+href="Entity.html">Entity</a> objects which match the query can be
+retrieved in a single list, or with an unbounded iterator.
+</p>
+<p>
+A <a href="Query.html">Query</a> does not cache results. Each use of the <a
+href="Query.html">Query</a> results in a new trip to the <a
+href="../Datastore.html">Datastore</a>.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000029">ancestor</a></li>
+        
+        <li><a href="#M000032">ancestor=</a></li>
+        
+        <li><a href="#M000062">convert_options</a></li>
+        
+        <li><a href="#M000045">count</a></li>
+        
+        <li><a href="#M000051">each</a></li>
+        
+        <li><a href="#M000046">entity</a></li>
+        
+        <li><a href="#M000056">fetch</a></li>
+        
+        <li><a href="#M000037">filter</a></li>
+        
+        <li><a href="#M000043">filter_predicates</a></li>
+        
+        <li><a href="#M000063">inspect</a></li>
+        
+        <li><a href="#M000052">iterator</a></li>
+        
+        <li><a href="#M000060">java_query</a></li>
+        
+        <li><a href="#M000028">kind</a></li>
+        
+        <li><a href="#M000023">new</a></li>
+        
+        <li><a href="#M000057">pquery</a></li>
+        
+        <li><a href="#M000033">set_ancestor</a></li>
+        
+        <li><a href="#M000042">sort</a></li>
+        
+        <li><a href="#M000044">sort_predicates</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="Query/Constants.html">AppEngine::Datastore::Query::Constants</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Query/Constants.html">AppEngine::Datastore::Query::Constants</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">JQuery</td>
+            <td>=</td>
+            <td class="attr-value">JavaDatastore::Query</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">FetchOptions</td>
+            <td>=</td>
+            <td class="attr-value">JavaDatastore::FetchOptions</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000023"></a><b>Query.new(kind)
+Query.new(ancestor)
+Query.new(kind, ancestor)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Creates a new <a href="Query.html">Query</a> with the specified kind and/or
+ancestor.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>kind: String. Only return entities with this kind.
+
+</li>
+<li>ancestor: <a href="Key.html">Key</a>. Only return entities with the given
+ancestor.
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000023_source')" id="l_M000023_source">show</a>
+                        
+                    </p>
+                    <div id="M000023_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 320</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-ivar">@query</span> = <span class="ruby-constant">JQuery</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000029"></a><b>ancestor</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000029_source')" id="l_M000029_source">show</a>
+                        
+                    </p>
+                    <div id="M000029_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 329</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ancestor</span>
+      <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">ancestor</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000032"></a><b>ancestor=</b>(key)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sets an ancestor for this query.
+</p>
+<p>
+This restricts the query to only return result entities that are descended
+from a given entity. In other words, all of the results will have the
+ancestor as their parent, or parent&#8217;s parent, or etc.
+</p>
+<p>
+If nil is specified, unsets any previously-set ancestor.
+</p>
+<p>
+Throws ArgumentError if the ancestor key is incomplete, or if you try to
+unset an ancestor and have not set a kind.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000032_source')" id="l_M000032_source">show</a>
+                        
+                    </p>
+                    <div id="M000032_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 345</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ancestor=</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">set_ancestor</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">clear_cache</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000062"></a><b>convert_options</b>(options)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Converts an options hash into <a
+href="Query.html#FetchOptions">FetchOptions</a>.
+</p>
+<p>
+Supported options:
+</p>
+<dl>
+<dt>:limit</dt><dd>Maximum number of results the query will return
+
+</dd>
+<dt>:offset</dt><dd>Number of result to skip before returning any results. Results that are
+skipped due to offset do not count against <tt>limit</tt>.
+
+</dd>
+<dt>:chunk</dt><dd>Determines the internal chunking strategy of the iterator returned by <a
+href="Query.html#M000052">iterator</a>. This affects only the performance
+of the query, not the actual results returned.
+
+</dd>
+<dt>:transaction</dt><dd>Transaction in which the query should run. Only supported for ancestor
+queries. Uses the current transaction if not specified.
+
+</dd>
+</dl>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000062_source')" id="l_M000062_source">show</a>
+                        
+                    </p>
+                    <div id="M000062_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 508</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">convert_options</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">transaction</span> = <span class="ruby-identifier">:current</span>
+      <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">transaction</span>, <span class="ruby-identifier">options</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">java_kind_of?</span> <span class="ruby-constant">FetchOptions</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">:transaction</span>
+        <span class="ruby-identifier">transaction</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:transaction</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">limit</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:limit</span>)
+      <span class="ruby-identifier">offset</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:offset</span>)
+      <span class="ruby-identifier">chunk_size</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:chunk</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">FetchOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_CHUNK_SIZE</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Unsupported options #{options.inspect}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">options</span> = <span class="ruby-constant">FetchOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">with_chunk_size</span>(<span class="ruby-identifier">chunk_size</span>)
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-identifier">offset</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">offset</span>
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">limit</span>
+      [<span class="ruby-identifier">transaction</span>, <span class="ruby-identifier">options</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000045"></a><b>count</b>(transaction=:current)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns the number of entities that currently match this query.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000045_source')" id="l_M000045_source">show</a>
+                        
+                    </p>
+                    <div id="M000045_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 424</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">count</span>(<span class="ruby-identifier">transaction</span>=<span class="ruby-identifier">:current</span>)
+      <span class="ruby-identifier">pquery</span>(<span class="ruby-identifier">transaction</span>).<span class="ruby-identifier">count_entities</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000051"></a><b>each</b>(options={})
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Streams the matching entities from the datastore and yields each matching
+entity.
+</p>
+<p>
+See <a href="Query.html#M000062">convert_options</a> for supported options
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000051_source')" id="l_M000051_source">show</a>
+                        
+                    </p>
+                    <div id="M000051_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 446</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-identifier">options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)  <span class="ruby-comment cmt"># :yields: entity</span>
+      <span class="ruby-identifier">transaction</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">convert_options</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">pquery</span>(<span class="ruby-identifier">transaction</span>).<span class="ruby-identifier">as_iterator</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000046"></a><b>entity</b>(transaction=:current)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Retrieves the one and only result for the {@code Query}.
+</p>
+<p>
+Throws <a href="TooManyResults.html">TooManyResults</a> if more than one
+result is returned from the <a href="Query.html">Query</a>.
+</p>
+<p>
+Returns the single, matching result, or nil if no entities match
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000046_source')" id="l_M000046_source">show</a>
+                        
+                    </p>
+                    <div id="M000046_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 435</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">entity</span>(<span class="ruby-identifier">transaction</span>=<span class="ruby-identifier">:current</span>)
+      <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">pquery</span>(<span class="ruby-identifier">transaction</span>).<span class="ruby-identifier">as_single_entity</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000056"></a><b>fetch</b>(options={})
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Fetch all matching entities. For large result sets you should prefer <a
+href="Query.html#M000051">each</a> or <a
+href="Query.html#M000052">iterator</a>, which stream the results from the
+datastore.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000056_source')" id="l_M000056_source">show</a>
+                        
+                    </p>
+                    <div id="M000056_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 468</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">options</span>={})
+      <span class="ruby-identifier">transaction</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">convert_options</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">pquery</span>(<span class="ruby-identifier">transaction</span>).<span class="ruby-identifier">as_list</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span>      
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000037"></a><b>filter</b>(name, operator, value)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Add a filter on the specified property.
+</p>
+<p>
+Note that entities with multi-value properties identified by name will
+match this filter if the multi-value property has at least one value that
+matches the condition expressed by <tt>operator</tt> and <tt>value</tt>.
+For more information on multi-value property filtering please see the <a
+href="http://code.google.com/appengine/docs/java/datastore">datastore
+documentation</a>
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000037_source')" id="l_M000037_source">show</a>
+                        
+                    </p>
+                    <div id="M000037_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 381</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">operator</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+      <span class="ruby-identifier">operator</span> = <span class="ruby-identifier">operator</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">operator</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+      <span class="ruby-identifier">operator</span> = <span class="ruby-constant">OP_MAP</span>[<span class="ruby-identifier">operator</span>]
+      <span class="ruby-identifier">value</span> = <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">ruby_to_java</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">operator</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">clear_cache</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000043"></a><b>filter_predicates</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns an unmodifiable list of the current filter predicates.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000043_source')" id="l_M000043_source">show</a>
+                        
+                    </p>
+                    <div id="M000043_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 414</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_predicates</span>
+      <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">getFilterPredicates</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000063"></a><b>inspect</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000063_source')" id="l_M000063_source">show</a>
+                        
+                    </p>
+                    <div id="M000063_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 526</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+      <span class="ruby-identifier">output</span> = <span class="ruby-value str">&quot;&lt;Query(&quot;</span>
+      <span class="ruby-identifier">query</span> = <span class="ruby-identifier">java_query</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;, &quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">ancestor</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">kind</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">ancestor</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">ancestor</span>
+      <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;)&quot;</span>
+      <span class="ruby-identifier">query</span>.<span class="ruby-identifier">filter_predicates</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pred</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; (#{pred.property_name.inspect} #{pred.operator.name} #{pred.value.inspect})&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">query</span>.<span class="ruby-identifier">sort_predicates</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pred</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; (ORDER BY #{pred.property_name.inspect} #{pred.direction.name})&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">output</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000052"></a><b>iterator</b>(options={})
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns an Enumerable over the matching entities.
+</p>
+<p>
+See <a href="Query.html#M000062">convert_options</a> for supported options
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000052_source')" id="l_M000052_source">show</a>
+                        
+                    </p>
+                    <div id="M000052_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 457</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">iterator</span>(<span class="ruby-identifier">options</span>={})
+      <span class="ruby-identifier">transaction</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">convert_options</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">pquery</span>(<span class="ruby-identifier">transaction</span>).<span class="ruby-identifier">as_iterator</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000060"></a><b>java_query</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns a Java.ComGoogleAppengineApiDatastore.<a
+href="Query.html">Query</a> for this query.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000060_source')" id="l_M000060_source">show</a>
+                        
+                    </p>
+                    <div id="M000060_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 487</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">java_query</span>
+      <span class="ruby-ivar">@query</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000028"></a><b>kind</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000028_source')" id="l_M000028_source">show</a>
+                        
+                    </p>
+                    <div id="M000028_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 324</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kind</span>
+      <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">kind</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000057"></a><b>pquery</b>(transaction=:current)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns a Java.ComGoogleAppengineApiDatastore.PreparedQuery for this query.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000057_source')" id="l_M000057_source">show</a>
+                        
+                    </p>
+                    <div id="M000057_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 478</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pquery</span>(<span class="ruby-identifier">transaction</span>=<span class="ruby-identifier">:current</span>)
+      <span class="ruby-ivar">@pquery</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">transaction</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:current</span>
+        <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">service</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">transaction</span>, <span class="ruby-ivar">@query</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">service</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-ivar">@query</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000033"></a><b>query.set_ancestor(key) &rarr; query
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sets an ancestor for this query.
+</p>
+<p>
+This restricts the query to only return result entities that are descended
+from a given entity. In other words, all of the results will have the
+ancestor as their parent, or parent&#8217;s parent, or etc.
+</p>
+<p>
+If nil is specified, unsets any previously-set ancestor.
+</p>
+<p>
+Throws ArgumentError if the ancestor key is incomplete, or if you try to
+unset an ancestor and have not set a kind.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000033_source')" id="l_M000033_source">show</a>
+                        
+                    </p>
+                    <div id="M000033_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 367</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_ancestor</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ancestor</span> = <span class="ruby-identifier">key</span>
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000042"></a><b>sort</b>(name, direction=ASCENDING)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Specify how the query results should be sorted.
+</p>
+<p>
+The first call to <a href="Query.html#M000042">sort</a> will register the
+property that will serve as the primary sort key. A second call to <a
+href="Query.html#M000042">sort</a> will set a secondary sort key, etc.
+</p>
+<p>
+This method will sort in ascending order by defaul. To control the order of
+the sort, pass ASCENDING or DESCENDING as the direction.
+</p>
+<p>
+Note that entities with multi-value properties identified by name will be
+sorted by the smallest value in the list. For more information on sorting
+properties with multiple values please see the <a
+href="http://code.google.com/appengine/docs/java/datastore">datastore
+documentation</a>.
+</p>
+<p>
+Returns self (for chaining)
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000042_source')" id="l_M000042_source">show</a>
+                        
+                    </p>
+                    <div id="M000042_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 407</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sort</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">ASCENDING</span>)
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+      <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">add_sort</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">direction</span>)
+      <span class="ruby-identifier">clear_cache</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000044"></a><b>sort_predicates</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns an unmodifiable list of the current sort predicates.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000044_source')" id="l_M000044_source">show</a>
+                        
+                    </p>
+                    <div id="M000044_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore.rb, line 419</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sort_predicates</span>
+      <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">getSortPredicates</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

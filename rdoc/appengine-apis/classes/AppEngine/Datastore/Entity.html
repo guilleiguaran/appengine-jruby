@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Datastore::Entity</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Datastore::Entity</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/datastore_types_rb.html">lib/appengine-apis/datastore_types.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+<a href="Entity.html">Entity</a> is the fundamental unit of data storage.
+It has an immutable identifier (contained in the <a
+href="Key.html">Key</a>) object, a reference to an optional parent <a
+href="Entity.html">Entity</a>, a kind (represented as an arbitrary string),
+and a set of zero or more typed properties.
+</p>
+<p>
+See also <a
+href="http://code.google.com/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Entity.html">code.google.com/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Entity.html</a>
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000073">[]</a></li>
+        
+        <li><a href="#M000075">[]=</a></li>
+        
+        <li><a href="#M000076">delete</a></li>
+        
+        <li><a href="#M000081">each</a></li>
+        
+        <li><a href="#M000072">get_property</a></li>
+        
+        <li><a href="#M000078">has_property</a></li>
+        
+        <li><a href="#M000077">has_property?</a></li>
+        
+        <li><a href="#M000083">java_value_to_ruby</a></li>
+        
+        <li><a href="#M000080">merge!</a></li>
+        
+        <li><a href="#M000071">new</a></li>
+        
+        <li><a href="#M000070">new</a></li>
+        
+        <li><a href="#M000069">new</a></li>
+        
+        <li><a href="#M000074">set_property</a></li>
+        
+        <li><a href="#M000082">to_hash</a></li>
+        
+        <li><a href="#M000079">update</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <span>Enumerable</span>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">SPECIAL_JAVA_TYPES</td>
+            <td>=</td>
+            <td class="attr-value">{         JavaDatastore::Text =&gt; Text,         JavaDatastore::Blob =&gt; Blob,         JavaDatastore::ShortBlob =&gt; ByteString,         JavaDatastore::Link =&gt; Link,         JavaDatastore::Email =&gt; Email,         JavaDatastore::Category =&gt; Category,         JavaDatastore::PhoneNumber =&gt; PhoneNumber,         JavaDatastore::PostalAddress =&gt; PostalAddress,         java.util.Date =&gt; Time,       }.freeze</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000069"></a><b>new</b>(kind, parent=nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Create a new <a href="Entity.html">Entity</a> with the specified kind and
+parent <a href="Entity.html">Entity</a>. The instantiated <a
+href="Entity.html">Entity</a> will have anincomplete <a
+href="Key.html">Key</a> when this constructor returns. The <a
+href="Key.html">Key</a> will remain incomplete until you put the <a
+href="Entity.html">Entity</a>, after which time the <a
+href="Key.html">Key</a> will have its id set.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000069_source')" id="l_M000069_source">show</a>
+                        
+                    </p>
+                    <div id="M000069_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 417</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">parent</span>=<span class="ruby-keyword kw">nil</span>); <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000070"></a><b>new</b>(kind, key_name, parent=nil)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Create a new <a href="Entity.html">Entity</a> with the specified kind, key
+name, and parent <a href="Entity.html">Entity</a>. The instantiated <a
+href="Entity.html">Entity</a> will have a complete <a
+href="Key.html">Key</a> when this constructor returns. The Key&#8217;s name
+field will be set to the value of key_name.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000070_source')" id="l_M000070_source">show</a>
+                        
+                    </p>
+                    <div id="M000070_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 423</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">key_name</span>, <span class="ruby-identifier">parent</span>=<span class="ruby-keyword kw">nil</span>); <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000071"></a><b>new</b>(key)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Create a new <a href="Entity.html">Entity</a> uniquely identified by the
+provided <a href="Key.html">Key</a>. Creating an entity for the purpose of
+insertion (as opposed to update) with a key that has its id field set is
+strongly discouraged unless the key was returned by a <a
+href="KeyRange.html">KeyRange</a>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000071_source')" id="l_M000071_source">show</a>
+                        
+                    </p>
+                    <div id="M000071_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 429</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">key</span>); <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000073"></a><b>[]</b>(name)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Entity.html#M000072">get_property</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000075"></a><b>[]=</b>(name, value)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Entity.html#M000074">set_property</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000076"></a><b>delete</b>(name)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Removes any property with the specified name. If there is no property with
+this name set, simply does nothing.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000076_source')" id="l_M000076_source">show</a>
+                        
+                    </p>
+                    <div id="M000076_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 468</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+        <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">removeProperty</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000081"></a><b>each</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Iterates over all the properties in this <a href="Entity.html">Entity</a>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000081_source')" id="l_M000081_source">show</a>
+                        
+                    </p>
+                    <div id="M000081_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 498</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>()  <span class="ruby-comment cmt"># :yields: name, value</span>
+        <span class="ruby-identifier">getProperties</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">java_value_to_ruby</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000072"></a><b>get_property</b>(name)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns the property with the specified name.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Entity.html#M000073">[]</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000072_source')" id="l_M000072_source">show</a>
+                        
+                    </p>
+                    <div id="M000072_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 433</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_property</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+        <span class="ruby-identifier">prop</span> = <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> { <span class="ruby-identifier">getProperty</span>(<span class="ruby-identifier">name</span>) }
+        <span class="ruby-identifier">java_value_to_ruby</span>(<span class="ruby-identifier">prop</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000078"></a><b>has_property</b>(name)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Entity.html#M000077">has_property?</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000077"></a><b>has_property?</b>(name)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Returns true if a property has been set. This function can be used to test
+if a property has been specifically set to nil.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Entity.html#M000078">has_property</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000077_source')" id="l_M000077_source">show</a>
+                        
+                    </p>
+                    <div id="M000077_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 479</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_property?</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+        <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">hasProperty</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000083"></a><b>java_value_to_ruby</b>(prop)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000083_source')" id="l_M000083_source">show</a>
+                        
+                    </p>
+                    <div id="M000083_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 512</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">java_value_to_ruby</span>(<span class="ruby-identifier">prop</span>)
+        <span class="ruby-identifier">ruby_type</span> = <span class="ruby-constant">SPECIAL_JAVA_TYPES</span>[<span class="ruby-identifier">prop</span>.<span class="ruby-identifier">class</span>]
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ruby_type</span>
+          <span class="ruby-identifier">ruby_type</span>.<span class="ruby-identifier">new_from_java</span>(<span class="ruby-identifier">prop</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">prop</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000080"></a><b>merge!</b>(other)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Entity.html#M000079">update</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000074"></a><b>set_property</b>(name, value)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Sets the property named, <tt>name</tt>, to <tt>value</tt>.
+</p>
+<p>
+As the value is stored in the datastore, it is converted to the
+datastore&#8217;s native type.
+</p>
+<p>
+All Enumerables are prone to losing their sort order and their original
+types as they are stored in the datastore. For example, a Set may be
+returned as an Array from getProperty, with an arbitrary re-ordering of
+elements.
+</p>
+<p>
+<tt>value</tt> may be one of the supported datatypes, or a heterogenous
+Enumerable of one of the supported datatypes.
+</p>
+<p>
+Throws ArgumentError if the value is not of a type that the data store
+supports.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Entity.html#M000075">[]=</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000074_source')" id="l_M000074_source">show</a>
+                        
+                    </p>
+                    <div id="M000074_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 456</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_property</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Symbol</span>
+        <span class="ruby-identifier">value</span> = <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">ruby_to_java</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-constant">Datastore</span>.<span class="ruby-identifier">convert_exceptions</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">setProperty</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000082"></a><b>to_hash</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000082_source')" id="l_M000082_source">show</a>
+                        
+                    </p>
+                    <div id="M000082_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 504</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>
+        <span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span>, <span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">item</span>
+          <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">value</span>
+          <span class="ruby-identifier">hash</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000079"></a><b>update</b>(other)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Add the properties from <tt>other</tt> to this <a
+href="Entity.html">Entity</a>. Other may be an <a
+href="Entity.html">Entity</a> or Hash
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Entity.html#M000080">merge!</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000079_source')" id="l_M000079_source">show</a>
+                        
+                    </p>
+                    <div id="M000079_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 489</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">other</span>)
+        <span class="ruby-identifier">other</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

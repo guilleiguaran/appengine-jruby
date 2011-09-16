@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>TempFile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />TempFile</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../files/lib/appengine-apis/tempfile_rb.html">lib/appengine-apis/tempfile.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            StringIO
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000159">close</a></li>
+        
+        <li><a href="#M000161">close!</a></li>
+        
+        <li><a href="#M000162">delete</a></li>
+        
+        <li><a href="#M000157">new</a></li>
+        
+        <li><a href="#M000160">open</a></li>
+        
+        <li><a href="#M000163">open</a></li>
+        
+        <li><a href="#M000158">unlink</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>path</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000157"></a><b>new</b>(basename, tmpdir=nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000157_source')" id="l_M000157_source">show</a>
+                        
+                    </p>
+                    <div id="M000157_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/tempfile.rb, line 28</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">basename</span>, <span class="ruby-identifier">tmpdir</span>=<span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">basename</span>
+    <span class="ruby-keyword kw">super</span>()
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000163"></a><b>open</b>(*args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000163_source')" id="l_M000163_source">show</a>
+                        
+                    </p>
+                    <div id="M000163_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/tempfile.rb, line 45</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000159"></a><b>close</b>(*args)
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="TempFile.html#M000161">close!</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000159_source')" id="l_M000159_source">show</a>
+                        
+                    </p>
+                    <div id="M000159_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/tempfile.rb, line 35</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">close</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">super</span>()
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000161"></a><b>close!</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="TempFile.html#M000159">close</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000162"></a><b>delete</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="TempFile.html#M000158">unlink</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000160"></a><b>open</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000160_source')" id="l_M000160_source">show</a>
+                        
+                    </p>
+                    <div id="M000160_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/tempfile.rb, line 39</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000158"></a><b>unlink</b>()
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="TempFile.html#M000162">delete</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000158_source')" id="l_M000158_source">show</a>
+                        
+                    </p>
+                    <div id="M000158_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/tempfile.rb, line 33</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unlink</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

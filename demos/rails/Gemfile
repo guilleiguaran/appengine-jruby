@@ -1,0 +1,24 @@
+# Critical default settings:
+disable_system_gems
+disable_rubygems
+bundle_path '.gems/bundler_gems'
+
+# List gems to bundle here:
+gem 'rails', '3.0.pre',
+     :git => 'git://github.com/rails/rails.git',
+     :ref => '1b27f5c4f72384081083fa025b6b10e5ab02ae5e'
+gem "rack", '1.0.1',
+    :git => 'git://github.com/rack/rack.git',
+    :ref => '4cc6af9b4f0b633b076f27d3a76bf86ebf9fe64e'
+gem 'i18n'
+gem 'tmail'
+gem 'rails_dm_datastore'
+gem 'activerecord-nulldb-adapter'
+
+#######################################
+#                                     #
+#  You should be running Rails 2.3.5  #
+#                                     #
+#  http://rails-depot.appspot.com/    #
+#                                     #
+#######################################

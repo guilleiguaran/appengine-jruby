@@ -1,0 +1,8 @@
+These files here are fragments used by a setup script.
+To generate a Rails 2.3.x app, use one of these guides:
+
+- http://gist.github.com/268192 2.3.5
+- http://gist.github.com/486250 2.3.8
+- http://gist.github.com/565991 2.3.9
+- http://gist.github.com/671792 2.3.10
+- http://gist.github.com/825451 2.3.11

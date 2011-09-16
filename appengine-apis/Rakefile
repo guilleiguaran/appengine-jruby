@@ -1,0 +1,74 @@
+require 'rubygems'
+require 'rake/gempackagetask'
+require 'rake/rdoctask'
+require 'rubygems/specification'
+require 'date'
+require 'spec/rake/spectask'
+
+require File.dirname(__FILE__) + '/lib/appengine-apis'
+
+# set up pretty rdoc if possible
+begin
+  gem 'rdoc'
+  require 'sdoc'
+  ENV['RDOCOPT'] = '-T lightblue'
+rescue Exception
+end
+
+def find_sdk_version
+  labs = Dir.glob("lib/appengine-api-labs-*")
+  if labs.size < 1
+    puts "Unable to determine SKD version."
+    puts "You must first package the App Engine SDK."
+    exit 1
+  else
+    return labs[0].split(/\.|-/)[-4..-2].join('.')
+  end
+end
+
+sdk_version = find_sdk_version
+
+GEM = "appengine-apis"
+GEM_VERSION = AppEngine::VERSION
+AUTHOR = "Ryan Brown"
+EMAIL = "ribrdb@gmail.com"
+HOMEPAGE = "http://code.google.com/p/appengine-jruby"
+SUMMARY = "Ruby API wrappers for App Engine"
+
+spec = Gem::Specification.new do |s|
+  s.name = GEM
+  s.version = GEM_VERSION
+  s.platform = Gem::Platform::RUBY
+  s.has_rdoc = true
+  s.extra_rdoc_files = ["README.rdoc", "COPYING"]
+  s.summary = SUMMARY
+  s.author = AUTHOR
+  s.email = EMAIL
+  s.homepage = HOMEPAGE
+  s.description = <<-EOF
+This gem includes the JRuby API wrappers for App Engine, as well as the
+required jar files from Google App Engine SDK for Java. Version #{sdk_version} 
+is included in this release.
+EOF
+  s.add_dependency("appengine-rack")
+  s.require_path = 'lib'
+  s.files = %w(COPYING README.rdoc Rakefile) + 
+      Dir.glob("spec/**/*.rb") + Dir.glob("lib/**/*")
+end
+
+task :default => :spec
+
+desc "Run specs"
+Spec::Rake::SpecTask.new do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts = %w(-fs --color)
+end
+
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.gem_spec = spec
+end
+
+Rake::RDocTask.new do |rd|
+   rd.main = "README.rdoc"
+   rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
+ end

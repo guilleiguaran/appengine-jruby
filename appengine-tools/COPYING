@@ -1,0 +1,9 @@
+= Appengine-Tools 
+
+This software is provided under the terms of the Apache license. For details
+see http://appengine-jruby.googlecode.com/hg/appengine-tools/LICENSE 
+
+= Additional Bundled Software
+
+JRuby-Rack (jruby-rack-*.jar) is distributed under the terms of the MIT license.
+See http://svn.codehaus.org/jruby-contrib/trunk/rack/LICENSE.txt for details.

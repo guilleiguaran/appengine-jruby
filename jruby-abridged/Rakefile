@@ -1,0 +1,96 @@
+require 'rubygems'
+require 'rake/gempackagetask'
+require 'rubygems/specification'
+require 'date'
+require 'erb'
+require 'fileutils'
+
+ROOT = File.expand_path(File.dirname(__FILE__))
+require "#{ROOT}/lib/appengine-jruby-jars"
+
+GEM_VERSION = AppEngine::JRubyJars::VERSION
+JRUBY_VERSION = AppEngine::JRubyJars::JRUBY_VERSION
+
+RBFILE = "lib/appengine-jruby-jars.rb"
+ABRIDGED_JAR = "lib/appengine-jruby-#{GEM_VERSION}.jar"
+JRUBY_COMPLETE = "jruby-complete-#{JRUBY_VERSION}.jar"
+RUBYGEMS_JAR = "lib/appengine-jruby-rubygems-#{GEM_VERSION}.jar"
+APPENGINE_GEM = File.join(ROOT, 'appengine_gem.rb')
+JRUBY_OPENSSL_GEM = 'jruby/openssl/gem.rb'
+
+spec = Gem::Specification.new do |s|
+  s.name = "appengine-jruby-jars"
+  s.version = GEM_VERSION
+  s.author = "Ryan Brown"
+  s.email = "ribrdb@google.com"
+  s.homepage = "http://code.google.com/p/appengine-jruby"
+  s.summary = "JRuby jar files for Google App Engine."
+  s.description = <<-EOF
+This gem includes the core JRuby code and the JRuby 1.8 stdlib as jar files,
+packaged specifically to work on Google App Engine. Version #{JRUBY_VERSION} 
+is included in this release.
+EOF
+  s.platform = Gem::Platform::RUBY
+  
+  # Uncomment this to add a dependency
+  # s.add_dependency "foo"
+  
+  s.require_path = 'lib'
+  s.files = Dir.glob("{LICENSE,COPYING}*") + [
+      RBFILE, ABRIDGED_JAR, RUBYGEMS_JAR]
+end
+
+directory 'lib'
+
+def check_system(*args)
+  puts args.join(" ")
+  unless system(*args)
+    puts "Error running #{args[0].inspect}"
+    exit($?)
+  end
+end
+
+file ABRIDGED_JAR => [JRUBY_COMPLETE, 'Rakefile', APPENGINE_GEM] do
+  # require 'appengine-rack'
+  verbose(true) do
+    chdir(File.dirname(__FILE__)) do
+      rm_rf('tmp')
+      mkdir('tmp')
+      chdir('tmp') do
+        site_ruby = 'META-INF/jruby.home/lib/ruby/site_ruby'
+        one_eight = "#{site_ruby}/1.8"
+        shared = "#{site_ruby}/shared"
+        check_system("jar", "xf", File.join(ROOT, JRUBY_COMPLETE))
+        chdir(one_eight) do
+          gems_files = Dir.glob("rubygems*")
+          check_system('jar', 'cf', File.join(ROOT, RUBYGEMS_JAR), *gems_files)
+          rm_rf(gems_files)
+        end
+        rm_rf("META-INF/jruby.home/lib/ruby/gems")
+        rm_rf("META-INF/jruby.home/lib/ruby/site_ruby/shared/ffi")
+        rm_rf("org/jruby/ext/ffi")
+        rm_rf("com/kenai/jffi")
+        # redistribute some other files
+        cp(APPENGINE_GEM, File.join(shared, JRUBY_OPENSSL_GEM))
+        check_system("jar", "cf", File.join(ROOT, ABRIDGED_JAR), '.')
+      end
+      rm_rf('tmp')
+    end
+  end
+end
+
+task :default => :gem
+
+Rake::GemPackageTask.new(spec).define
+
+desc "install the gem locally"
+task :install => [:package] do
+  sh %{sudo gem install pkg/#{GEM}-#{GEM_VERSION}}
+end
+
+desc "create a gemspec file"
+task :make_spec do
+  open("#{GEM}.gemspec", "w") do |file|
+    file.puts spec.to_ruby
+  end
+end

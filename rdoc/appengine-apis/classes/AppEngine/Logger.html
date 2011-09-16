@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Logger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Logger</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../files/lib/appengine-apis/logger_rb.html">lib/appengine-apis/logger.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            ::Logger
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+Replacement for the standard logger.rb. Saves logs to the App Engine
+Dashboard (or to the java logging api when running locally).
+</p>
+<pre>
+  logger = AppEngine::Logger.new
+  logger.warn &quot;foobar&quot;
+</pre>
+<p>
+or (for compatibility with code already using logger.rb)
+</p>
+<pre>
+ Logger = AppEngine::Logger
+ logger = Logger.new(stream)  # stream is ignored
+ logger.info &quot;Hello, dashboard&quot;
+</pre>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000102"><<</a></li>
+        
+        <li><a href="#M000103">add</a></li>
+        
+        <li><a href="#M000104">log</a></li>
+        
+        <li><a href="#M000101">new</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">SEVERITIES</td>
+            <td>=</td>
+            <td class="attr-value">{       DEBUG =&gt; ApiProxy::LogRecord::Level::debug,       INFO =&gt; ApiProxy::LogRecord::Level::info,       WARN =&gt; ApiProxy::LogRecord::Level::warn,       ERROR =&gt; ApiProxy::LogRecord::Level::error,       FATAL =&gt; ApiProxy::LogRecord::Level::fatal,     }</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000101"></a><b>new</b>(*args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000101_source')" id="l_M000101_source">show</a>
+                        
+                    </p>
+                    <div id="M000101_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/logger.rb, line 49</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">super</span>(<span class="ruby-constant">STDERR</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000102"></a><b>&lt;&lt;</b>(msg)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000102_source')" id="l_M000102_source">show</a>
+                        
+                    </p>
+                    <div id="M000102_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/logger.rb, line 53</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">msg</span>)
+      <span class="ruby-identifier">write_log</span>(<span class="ruby-constant">INFO</span>, <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">&quot;&quot;</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000103"></a><b>add</b>(severity, msg=nil, progname=nil, &amp;block)
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Logger.html#M000104">log</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000103_source')" id="l_M000103_source">show</a>
+                        
+                    </p>
+                    <div id="M000103_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/logger.rb, line 57</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">severity</span>, <span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">progname</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">severity</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">UNKNOWN</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">severity</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@level</span>
+      <span class="ruby-identifier">progname</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@progname</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-identifier">msg</span> = <span class="ruby-keyword kw">yield</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">progname</span>
+          <span class="ruby-identifier">progname</span> = <span class="ruby-ivar">@progname</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">write_log</span>(<span class="ruby-identifier">severity</span>, <span class="ruby-identifier">msg</span>, <span class="ruby-identifier">progname</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000104"></a><b>log</b>(severity, msg=nil, progname=nil, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Logger.html#M000103">add</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

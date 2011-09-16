@@ -1,0 +1,44 @@
+require 'rubygems' unless ENV['NO_RUBYGEMS']
+require 'rake/gempackagetask'
+require 'rubygems/specification'
+require 'date'
+require 'spec/rake/spectask'
+require 'yaml'
+
+require File.join(File.dirname(__FILE__), 'google_appengine.rb')
+
+spec = Gem::Specification.new do |s|
+  s.name = "google-appengine"
+  s.version = AppEngine::VERSION
+  s.authors = ["Ryan Brown", "John Woodell"]
+  s.email = ["ribrdb@google.com", "woodie@google.com"]
+  s.homepage = "http://code.google.com/p/appengine-jruby"
+  s.description = s.summary = "Meta gem for Ruby on Google App Engine."
+  
+  s.platform = Gem::Platform::RUBY
+  s.add_dependency "appengine-apis", "0.0.23"
+  s.add_dependency "appengine-rack", "0.0.12"
+  s.add_dependency "appengine-sdk", "1.4.2"
+  s.add_dependency "appengine-tools", "0.0.17"
+  s.has_rdoc = false
+  s.require_paths = ['.']
+  s.files = ['google_appengine.rb']
+end
+
+task :default => :gem
+
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.gem_spec = spec
+end
+
+desc "install the gem locally"
+task :install => [:package] do
+  sh %{sudo gem install pkg/#{GEM}-#{GEM_VERSION}}
+end
+
+desc "create a gemspec file"
+task :make_spec do
+  File.open("#{GEM}.gemspec", "w") do |file|
+    file.puts spec.to_ruby
+  end
+end

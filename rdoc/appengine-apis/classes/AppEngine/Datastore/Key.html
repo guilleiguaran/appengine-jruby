@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Datastore::Key</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Datastore::Key</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/datastore_types_rb.html">lib/appengine-apis/datastore_types.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+The primary key for a datastore entity.
+</p>
+<p>
+A datastore GUID. A <a href="Key.html">Key</a> instance uniquely identifies
+an entity across all apps, and includes all information necessary to fetch
+the entity from the datastore with <a
+href="../Datastore.html">Datastore</a>.get(<a href="Key.html">Key</a>).
+</p>
+<p>
+See also <a
+href="http://code.google.com/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Key.html">code.google.com/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Key.html</a>
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000061">from_path</a></li>
+        
+        <li><a href="#M000058">id_or_name</a></li>
+        
+        <li><a href="#M000059">new</a></li>
+        
+        <li><a href="#M000055">to_s</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000061"></a><b>Key.from_path(parent=nil, kind, id, [kind, id]...) &rarr; Key
+Constructs a Key out of a path.
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+This is useful when an application wants to use just the &#8216;id&#8217;
+portion of a key in e.g. a URL, where the rest of the URL provides enough
+context to fill in the rest, i.e. the app id (always implicit), the entity
+kind, and possibly an ancestor key. Since the &#8216;id&#8217; is a
+relatively small int, it is more attractive for use in end-user-visible
+URLs than the full string representation of a key.
+</p>
+<p>
+Args:
+</p>
+<ul>
+<li>parent: Optional parent key
+
+</li>
+<li>kind: the entity kind (a string)
+
+</li>
+<li>id: the id (an integer)
+
+</li>
+<li>Additional, optional &#8216;kind&#8217; and &#8216;id&#8217; arguments are
+allowed in
+
+</li>
+</ul>
+<pre>
+ an alternating order (kind1, 1, kind2, 2, ...)
+</pre>
+<ul>
+<li>options: a Hash. If specified, options[:parent] is used as
+
+<pre>
+ the parent Key.
+</pre>
+</li>
+</ul>
+<p>
+Returns:
+</p>
+<ul>
+<li>A new <a href="Key.html">Key</a> instance whose kind and id methods return
+the <b>last</b>
+
+<pre>
+ kind and id arugments passed
+</pre>
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000061_source')" id="l_M000061_source">show</a>
+                        
+                    </p>
+                    <div id="M000061_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 308</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from_path</span>(<span class="ruby-identifier">parent_or_kind</span>, <span class="ruby-identifier">kind_or_id</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+          <span class="ruby-comment cmt"># Extract parent</span>
+          <span class="ruby-identifier">parent</span> = <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parent_or_kind</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Key</span>
+            <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent_or_kind</span>
+            <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>,<span class="ruby-value">0</span>] = [<span class="ruby-identifier">kind_or_id</span>]
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>,<span class="ruby-value">0</span>] = [<span class="ruby-identifier">parent_or_kind</span>, <span class="ruby-identifier">kind_or_id</span>]
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">'Expected an even number of arguments '</span> \
+                                 <span class="ruby-value str">'(kind1, id1, kind2, id2, ...); received '</span> \
+                                 <span class="ruby-node">&quot;#{args.inspect}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-comment cmt"># Type-check parent</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parent</span>
+            <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Key</span>
+              <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">'Expected nil or a Key as a parent; '</span> \
+                                   <span class="ruby-node">&quot;received #{parent} (a #{parent.class}).&quot;</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">is_complete?</span>
+              <span class="ruby-identifier">raise</span> <span class="ruby-constant">KeyError</span>, <span class="ruby-value str">'The parent key has not yet been Put.'</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">current</span> = <span class="ruby-identifier">parent</span>
+          (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span>).<span class="ruby-identifier">step</span>(<span class="ruby-value">2</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">kind</span>, <span class="ruby-identifier">id</span> = <span class="ruby-identifier">args</span>[<span class="ruby-identifier">i</span>,<span class="ruby-value">2</span>]
+            <span class="ruby-identifier">kind</span> = <span class="ruby-identifier">kind</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">kind</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Symbol</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current</span>
+              <span class="ruby-identifier">current</span> = <span class="ruby-identifier">current</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">id</span>)
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">current</span> = <span class="ruby-constant">JavaDatastore</span><span class="ruby-operator">::</span><span class="ruby-constant">KeyFactory</span>.<span class="ruby-identifier">createKey</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">id</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">current</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000059"></a><b>new</b>(encoded)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Creates a new <a href="Key.html">Key</a> from an encoded String.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000059_source')" id="l_M000059_source">show</a>
+                        
+                    </p>
+                    <div id="M000059_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 279</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>(<span class="ruby-identifier">encoded</span>)
+          <span class="ruby-constant">JavaDatastore</span><span class="ruby-operator">::</span><span class="ruby-constant">KeyFactory</span>.<span class="ruby-identifier">stringToKey</span>(<span class="ruby-identifier">encoded</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000058"></a><b>id_or_name</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000058_source')" id="l_M000058_source">show</a>
+                        
+                    </p>
+                    <div id="M000058_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 272</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">id_or_name</span>
+        <span class="ruby-identifier">name</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">id</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000055"></a><b>to_s</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Converts a <a href="Key.html">Key</a> into a websafe string. For example,
+this string can safely be used as an URL parameter embedded in a HTML
+document.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000055_source')" id="l_M000055_source">show</a>
+                        
+                    </p>
+                    <div id="M000055_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 264</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+        <span class="ruby-constant">JavaDatastore</span><span class="ruby-operator">::</span><span class="ruby-constant">KeyFactory</span>.<span class="ruby-identifier">keyToString</span>(<span class="ruby-keyword kw">self</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

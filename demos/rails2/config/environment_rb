@@ -1,0 +1,15 @@
+  # Skip these so generators can run from MRI
+  if defined? JRUBY_VERSION
+    # Patch Rails Framework
+    require 'rails_appengine'
+    # Use DataMapper to access datastore
+    require 'rails_dm_datastore'
+    # Set Logger from appengine-apis, all environments
+    require 'appengine-apis/logger'
+    config.logger = AppEngine::Logger.new
+    # Skip frameworks you're not going to use.
+    config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
+  end
+  # Skip plugin locators
+  config.plugin_locators -= [Rails::Plugin::GemLocator]
+

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AppEngine::Datastore::Rating</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />AppEngine::Datastore::Rating</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/appengine-apis/datastore_types_rb.html">lib/appengine-apis/datastore_types.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Object
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+A user-provided integer rating for a piece of content. Normalized to a
+0-100 scale.
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000039">inspect</a></li>
+        
+        <li><a href="#M000036">new</a></li>
+        
+        <li><a href="#M000040">rating</a></li>
+        
+        <li><a href="#M000041">to_i</a></li>
+        
+        <li><a href="#M000038">to_s</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">MIN_VALUE</td>
+            <td>=</td>
+            <td class="attr-value">0</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">MAX_VALUE</td>
+            <td>=</td>
+            <td class="attr-value">100</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000036"></a><b>new</b>(rating)
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Raises ArgumentError if rating < 0 or rating > 100.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000036_source')" id="l_M000036_source">show</a>
+                        
+                    </p>
+                    <div id="M000036_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 179</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rating</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rating</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">MIN_VALUE</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">rating</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">MAX_VALUE</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;rating must be no smaller than #{MIN_VALUE} &quot;</span> <span class="ruby-operator">+</span>
+              <span class="ruby-node">&quot;and no greater than #{MAX_VALUE} (received #{rating})&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">rating</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000039"></a><b>inspect</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000039_source')" id="l_M000039_source">show</a>
+                        
+                    </p>
+                    <div id="M000039_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 193</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+        <span class="ruby-node">&quot;#&lt;Rating #{rating}&gt;&quot;</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000040"></a><b>rating</b>()
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Rating.html#M000041">to_i</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000040_source')" id="l_M000040_source">show</a>
+                        
+                    </p>
+                    <div id="M000040_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 200</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rating</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000041"></a><b>to_i</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  
+                  <p>
+Alias for <a href="Rating.html#M000040">rating</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000038"></a><b>to_s</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000038_source')" id="l_M000038_source">show</a>
+                        
+                    </p>
+                    <div id="M000038_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/appengine-apis/datastore_types.rb, line 189</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+        <span class="ruby-identifier">rating</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    
